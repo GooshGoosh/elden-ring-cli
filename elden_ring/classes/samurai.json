@@ -1,0 +1,23 @@
+{
+	"Class": "Samurai",
+	"Stats":
+		{
+			"Vig:": 12,
+			"Mnd:": 11,
+			"End:": 13,
+			"Str:": 12,
+			"Dex:": 15,
+			"Int:": 9,
+			"Fth:": 8,
+			"Arc:": 8
+		},
+	"Equipment":
+		{
+			"Right Hand:": "Uchigatana",
+			"Left Hand:": "Red Thorn Roundshield",
+			"Helm:": "Land of Reeds Helm",
+			"Torso:": "Land of Reeds Armor",
+			"Wrists:": "Land of Reeds Gauntlets",
+			"Legs:": "Land of Reeds Greaves"
+		}
+}

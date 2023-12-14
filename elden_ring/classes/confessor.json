@@ -1,0 +1,23 @@
+{
+	"Class": "Confessor",
+	"Stats":
+		{
+			"Vig:": 10,
+			"Mnd:": 13,
+			"End:": 10,
+			"Str:": 12,
+			"Dex:": 12,
+			"Int:": 9,
+			"Fth:": 14,
+			"Arc:": 9
+		},
+	"Equipment":
+		{
+			"Right Hand:": "Broadsword",
+			"Left Hand:": "Blue Crest Heater Shield",
+			"Helm:": "Confessor Hood",
+			"Torso:": "Confessor Armor",
+			"Wrists:": "Confessor Gloves",
+			"Legs:": "Confessor Boots"
+		}
+}

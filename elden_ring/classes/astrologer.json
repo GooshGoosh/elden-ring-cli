@@ -1,0 +1,23 @@
+{
+	"Class": "Astrologer",
+	"Stats":
+		{
+			"Vig:": 9,
+			"Mnd:": 15,
+			"End:": 9,
+			"Str:": 8,
+			"Dex:": 12,
+			"Int:": 16,
+			"Fth:": 7,
+			"Arc:": 9
+		},
+	"Equipment":
+		{
+			"Right Hand:": "Short Sword",
+			"Left Hand:": "Scripture Wooden Shield",
+			"Helm:": "Astrologer Hood",
+			"Torso:": "Astrologer Robe",
+			"Wrists:": "Astrologer Gloves",
+			"Legs:": "Astrologer Trousers"
+		}
+}
