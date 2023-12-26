@@ -1,9 +1,8 @@
 # Author: Alex Grecinger
 # Copyright (C) 2023 Alex Grecinger
 
-#!/usr/bin/env python3
 
-'''
+"""
 eldenRingOOP.py - Mini Elden Ring-based game that lets the user
 the tutorial boss Solder of Godrick and a majority of the field,
 mini, and main bosses from Elden Ring. Uses a random die roll of
@@ -15,7 +14,7 @@ class name followed by each stat and their values for each Elden
 Ring starting class (e.g. Vig: 0).
 The stats are followed by the 6 equipment slots for the character
 including Right Hand, Left Hand, Helm, Torso, Wrists, and Legs.
-'''
+"""
 
 
 import random
