@@ -1,46 +1,115 @@
+# Author: Alex Grecinger
+# Copyright (C) 2023 Alex Grecinger
+
+"""
+This module is responsible for the Boss object in the eldenRing.py program.
+The boss' stats and actions are controlled through boss.py via the Boss class
+and various attributes and methods.
+"""
+
 import random
 import math
 import sys
 import os
-import pandas as pd
 import time
+import pandas as pd
 
 
 def roll_d10():
+    """roll_d10 Generates a random number from 1-10 (inclusive).
+
+    Returns:
+        int: Returns a number from 1-10 (inclusive).
+    """
     # Roll a number in the range 1-10 and return it.
     return random.randrange(1,11)
 
 
 # Class for the boss character.
 class Boss():
-    __bossesPath = os.path.abspath(f'./bosses/') 
+    """A class used to represent and manage an Elden Ring boss for the
+    eldenRing.py program file.
+
+    Attributes
+    ----------
+    _bosses_path: str
+        A string formatted to be the absolute path of the given directory.
+        The directory should always point to the bosses directory in the
+        elden_ring directory.
+    _boss_name: str
+        The name of the boss.
+    _boss_health: int
+        The boss' health value.
+    _boss_attack: int
+        The boss' attack value.
+    _boss_armor: int
+        The boss' armor value.
+    _file_path: str
+        A string to represent the file for the boss category. The string
+        is joined to the _bosses_path attribute.
+    _df: pandas.core.frame.DataFrame
+        A pandas DataFrame holding the data for the boss list csv file.
+    _boss_data: pandas.core.frame.DataFrame
+        A pandas DataFrame holding the name and health value of a sample
+        from the _df attribute.
+
+    Methods
+    -------
+    set_field_boss()
+        Sets the stats for a boss from the field-boss-list.csv file.
+    set_mini_boss()
+        Sets the stats for a boss from the mini-boss-list.csv file.
+    set_main_boss()
+        Sets the stats for a boss from the main-boss-list.csv file.
+    print_stats()
+        Prints the name and health of the current boss object.
+    get_health()
+        Returns the health value of the boss object.
+    get_armor()
+        Returns the armor value of the boss object.
+    get_name()
+        Returns the name of the boss object.
+    reduce_health(damage=0)
+        Subtracts the current value of _boss_health by the value
+        given to the damage parameter.
+    attack()
+        Perform a d10 die roll to determine the boss' damage done to the
+        player. Round the damage number up to nearest whole number.
+
+    """
+    _bosses_path = os.path.abspath('./bosses/')
 
     def __init__(self):
         # Set the starter/tutorial boss name, health, attack, and armor.
-        self.__bossHpDivisor = 2
-        self.__bossName = 'Soldier of Godrick'
-        self.__bossHealth = math.ceil(384 / self.__bossHpDivisor)
-        self.__bossAttack = 10
-        self.__bossArmor = 7
+        self._boss_name = 'Soldier of Godrick'
+        self._boss_health = math.ceil(384 / 2)
+        self._boss_attack = 10
+        self._boss_armor = 7
+        self._file_path = ''
+        self._df = pd.DataFrame()
+        self._boss_data = pd.DataFrame()
 
     def set_field_boss(self):
-        # Set the boss stats for a field boss.
-        self.__filePath = os.path.join(Boss.__bossesPath,
+        """set_field_boss Sets the stats for a boss from the field-boss-list
+        CSV file. Creates a pandas DataFrame of the data and grabs a sample
+        to use as the boss name and health.
+        """
+        # Set the boss file path, attack, and armor.
+        self._file_path = os.path.join(Boss._bosses_path,
                                        'field-boss-list.csv')
-        self.__bossHpDivisor = 4
-        self.__bossHealth = 500
-        self.__bossAttack = 15
-        self.__bossArmor = 9
+        self._boss_attack = 15
+        self._boss_armor = 9
 
         # Read the field boss list file and create a list of field bosses.
+        # Set the boss name and health.
         try:
-            self.__df = pd.read_csv(self.__filePath,sep=';')
-            self.__bossData = self.__df.sample()
-            self.__bossName = self.__bossData.iloc[0,0]
-            self.__bossHealth = math.ceil(self.__bossData.iloc[0,1]
-                                          / self.__bossHpDivisor)
+            self._df = pd.read_csv(self._file_path,sep=';')
+            self._boss_data = self._df.sample()
+            self._boss_name = self._boss_data.iloc[0,0]
+            self._boss_health = math.ceil(self._boss_data.iloc[0,1]
+                                          / 4)
         except FileNotFoundError:
-            print('\nFile {} not found! Exiting...'.format(self.__filePath))
+            print(f'\nFile {self._file_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -49,23 +118,26 @@ class Boss():
             sys.exit(1)
 
     def set_mini_boss(self):
-        # Set the boss stats for a mini boss.
-        self.__filePath = os.path.join(Boss.__bossesPath,
+        """set_mini_boss Sets the stats for a boss from the mini-boss-list
+        CSV file. Creates a pandas DataFrame of the data and grabs a sample
+        to use as the boss name and health.
+        """
+        # Set the boss file path, attack, and armor.
+        self._file_path = os.path.join(Boss._bosses_path,
                                        'mini-boss-list.csv')
-        self.__bossHpDivisor = 6
-        self.__bossHealth = 800
-        self.__bossAttack = 20
-        self.__bossArmor = 11
+        self._boss_attack = 20
+        self._boss_armor = 11
 
         # Read the mini boss list file and create a list of mini bosses.
+        # Set the boss name and health.
         try:
-            self.__df = pd.read_csv(self.__filePath,sep=';')
-            self.__bossData = self.__df.sample()
-            self.__bossName = self.__bossData.iloc[0,0]
-            self.__bossHealth = math.ceil(self.__bossData.iloc[0,1]
-                                          / self.__bossHpDivisor)
+            self._df = pd.read_csv(self._file_path,sep=';')
+            self._boss_data = self._df.sample()
+            self._boss_name = self._boss_data.iloc[0,0]
+            self._boss_health = math.ceil(self._boss_data.iloc[0,1]
+                                          / 6)
         except FileNotFoundError:
-            print('\nFile {} not found! Exiting...'.format(self.__filePath))
+            print(f'\nFile {self._file_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -74,23 +146,26 @@ class Boss():
             sys.exit(1)
 
     def set_main_boss(self):
-        # Set the boss stats for the main boss.
-        self.__filePath = os.path.join(Boss.__bossesPath,
+        """set_main_boss Sets the stats for a boss from the main-boss-list
+        CSV file. Creates a pandas DataFrame of the data and grabs a sample
+        to use as the boss name and health.
+        """
+        # Set the boss file path, attack, and armor.
+        self._file_path = os.path.join(Boss._bosses_path,
                                        'main-boss-list.csv')
-        self.__bossHpDivisor = 8
-        self.__bossHealth = 1200
-        self.__bossAttack = 25
-        self.__bossArmor = 13
+        self._boss_attack = 25
+        self._boss_armor = 13
 
         # Read the main boss list file and create a list of main bosses.
+        # Set the boss name and health.
         try:
-            self.__df = pd.read_csv(self.__filePath,sep=';')
-            self.__bossData = self.__df.sample()
-            self.__bossName = self.__bossData.iloc[0,0]
-            self.__bossHealth = math.ceil(self.__bossData.iloc[0,1]
-                                          / self.__bossHpDivisor)
+            self._df = pd.read_csv(self._file_path,sep=';')
+            self._boss_data = self._df.sample()
+            self._boss_name = self._boss_data.iloc[0,0]
+            self._boss_health = math.ceil(self._boss_data.iloc[0,1]
+                                          / 8)
         except FileNotFoundError:
-            print('\nFile {} not found! Exiting...'.format(self.__filePath))
+            print(f'\nFile {self._file_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -99,31 +174,53 @@ class Boss():
             sys.exit(1)
 
     def print_stats(self):
-        # Print the boss' name and health.
-        print('\n{}'.format(self.__bossName))
-        print('HP: {}'.format(self.__bossHealth))
+        """print_stats Prints the boss name and health.
+        """
+        print(f'\n{self._boss_name}')
+        print(f'HP: {self._boss_health}')
 
     def get_health(self):
-        # Return the boss' health.
-        return self.__bossHealth
+        """get_health Returns the boss' health value.
+
+        Returns:
+            int: The boss' health.
+        """
+        return self._boss_health
 
     def get_armor(self):
-        # Return the boss' armor for player damage rolls.
-        return self.__bossArmor
+        """get_armor Returns the boss' armor value.
+
+        Returns:
+            int: The boss' armor.
+        """
+        return self._boss_armor
 
     def get_name(self):
-        # Return the boss' name.
-        return self.__bossName
+        """get_name Return the boss' name.
+
+        Returns:
+            str: The boss' name.
+        """
+        return self._boss_name
 
     def reduce_health(self, damage = 0):
-        # Reduce the boss' health by the damage amount.
-        self.__bossHealth -= damage
+        """reduce_health Reduce the boss' health value.
+
+        Args:
+            damage (int, optional): The amount to reduce the boss' health.
+            Defaults to 0.
+        """
+        self._boss_health -= damage
 
     def attack(self):
-        # Perform a d10 die roll to determine the boss' damage done to the
-        # player. The damage dealt is equal to a percentage of the boss'
-        # current attack rating. The percentage is based off the results of
-        # the d10 die roll. For example, a roll of 4 will do 40% of the boss'
-        # attack rating in damage.
-        # Round the damage number up to nearest whole number.
-        return math.ceil(self.__bossAttack * (roll_d10() / 10))
+        """attack Perform a d10 die roll to determine the boss' damage done to
+        the player. The damage dealt is equal to a percentage of the boss'
+        current attack rating. The percentage is based off the results of the
+        d10 die roll. For example, a roll of 4 will do 40% of the boss' attack
+        rating in damage.
+        Round the damage number up to the nearest whole number.
+
+        Returns:
+            int: The amount of damage the boss will deal with its attack.
+        """
+        return math.ceil(self._boss_attack * (roll_d10() / 10))
