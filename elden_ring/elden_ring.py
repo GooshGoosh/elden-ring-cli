@@ -33,6 +33,8 @@ except ImportError:
     sys.exit(1)
 
 
+PLAYER_REST_TIME = 2.5
+
 def roll_d20(advantage=False, disadvantage=False):
     """roll_d20 Generate a random number in the range 1-20 (inclusive) and
     return it. If the roller has advantage, then generate two numbers and return
@@ -804,15 +806,15 @@ def single_player_game():
 
     tutorial_boss_fight(player_one, boss_one) # Begin the tutorial boss fight.
     player_one.grace()   # Rest and heal the player.
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     field_boss_fight(player_one, boss_one)    # Begin the field boss fight.
     player_one.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     mini_boss_fight(player_one, boss_one) # Begin the mini boss fight.
     player_one.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     main_boss_fight(player_one, boss_one) # Begin the main boss fight.
 
@@ -836,19 +838,19 @@ def two_player_game():
     two_player_tutorial_boss_fight(players, boss_one)
     for player in players:  # Rest and heal each of the players
         player.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     # Begin the field boss fight.
     two_player_field_boss_fight(players, boss_one)
     for player in players:  # Rest and heal each of the players
         player.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     # Begin the mini boss fight.
     two_player_mini_boss_fight(players, boss_one)
     for player in players:  # Rest and heal each of the players
         player.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     # Begin the main boss fight.
     two_player_main_boss_fight(players, boss_one)
@@ -876,19 +878,19 @@ def three_player_game():
     three_player_tutorial_boss_fight(players, boss_one)
     for player in players:  # Rest and heal each of the players
         player.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     # Begin the field boss fight.
     three_player_field_boss_fight(players, boss_one)
     for player in players:  # Rest and heal each of the players
         player.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     # Begin the mini boss fight.
     three_player_mini_boss_fight(players, boss_one)
     for player in players:  # Rest and heal each of the players
         player.grace()
-    time.sleep(2.5)
+    time.sleep(PLAYER_REST_TIME)
 
     # Begin the main boss fight.
     three_player_main_boss_fight(players, boss_one)
