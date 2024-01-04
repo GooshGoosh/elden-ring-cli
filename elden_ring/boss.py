@@ -224,3 +224,7 @@ class Boss():
             int: The amount of damage the boss will deal with its attack.
         """
         return math.ceil(self._boss_attack * (roll_d10() / 10))
+
+
+if __name__ == "__main__":
+    print("This module is to be imported by elden_ring.py.")
