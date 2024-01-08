@@ -157,7 +157,7 @@ def tutorial_boss_fight(player_obj, boss_obj):
 
 def two_player_tutorial_boss_fight(player_list, boss_obj):
     """two_player_tutorial_boss_fight Function fight the tutorial boss
-    "Soldier of Godrick. This should be the first fight performed by the player
+    "Soldier of Godrick". This should be the first fight performed by the player
     and should only occur once in the program. This version is to be used for
     two players.
 
@@ -215,7 +215,7 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
 
 def three_player_tutorial_boss_fight(player_list, boss_obj):
     """three_player_tutorial_boss_fight Function to fight the tutorial boss
-    "Soldier of Godrick. This should be the first fight performed by the player
+    "Soldier of Godrick". This should be the first fight performed by the player
     and should only occur once in the program. This version is to be used for
     three players.
 
