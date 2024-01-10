@@ -1,17 +1,22 @@
-Name;Health
-Ancestor Spirit;4393
-Borealis, the Freezing Fog;11268
-Cemetery Shade;1467
-Decaying Ekzykes;23731
-Dragonking Soldier of Nokstella;4372
-Dragonkin Soldier;7655
-Flying Dragon Agheel;3200
-Glintstone Dragon Adula;11550
-Godskin Apostle;13596
-Godskin Duo;26350
-Godskin Noble;10060
-Leonine Misbegotten;2198
-Margitt, the Fell Omen;4174
-Red Wolf of Radagon;2204
-Valiant Gargoyle;5671
-Valiant Gargoyle (Twinblade);5671
+Name;Health;Runes
+Ancestor Spirit;4393;13000
+Borealis, the Freezing Fog;11268;100000
+Cemetery Shade;780;2200
+Cemetery Shade;691;3500
+Cemetery Shade;1467;6800
+Decaying Ekzykes;23731;38000
+Dragonking Soldier of Nokstella;4372;12000
+Dragonkin Soldier;5758;16000
+Dragonkin Soldier;7655;58000
+Flying Dragon Agheel;3200;5000
+Glintstone Dragon Adula;11550;120000
+Godskin Apostle & Godskin Noble;22581;70000
+Godskin Duo;26350;170000
+Leonine Misbegotten;2198;3800
+Margitt, the Fell Omen;4174;12000
+Margitt, the Fell Omen;8193;16800
+Red Wolf of Radagon;2204;14000
+Valiant Gargoyles;11342
+Valiant Gargoyle;5671;2835
+Valiant Gargoyle;6461;3332
+Valiant Gargoyle;11670;8608

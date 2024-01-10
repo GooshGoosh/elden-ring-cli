@@ -1,19 +1,19 @@
-Name;Health
-Astel, Naturalborn of the Void;11170
-Beast Clergyman;10620
-Dragonlord Placidusax;26651
-Elden Beast;22127
-Fire Giant;42363
-Godfrey, First Elden Lord;21903
-Godrick the Grafted;6080
-Hoarah Loux;21903
-Lichdragon Fortissax;12903
-Malenia, Blade of Miquella;33251
-Maliketh of the Black Blade;10620
-Mohg, Lord of Blood;18389
-Morgott, the Omen King;10399
-Radagon of the Golden Order;13339
-Regal Ancestor Spirit;6301
-Rennala, Queen of the Full Moon;7590
-Rykard, Lord of Blasphemy;89613
-Starscourge Radahn;9572
+Name;Health;Runes
+Astel, Naturalborn of the Void;11170;80000
+Beast Clergyman;10620;220000
+Dragonlord Placidusax;26651;280000
+Elden Beast;22127;500000
+Fire Giant;42363;180000
+Godfrey, First Elden Lord;21903;300000
+Godrick the Grafted;6080;20000
+Hoarah Loux;21903;300000
+Lichdragon Fortissax;12903;90000
+Malenia, Blade of Miquella;33251;480000
+Maliketh of the Black Blade;10620;220000
+Mohg, Lord of Blood;18389;420000
+Morgott, the Omen King;10399;120000
+Radagon of the Golden Order;13339;500000
+Regal Ancestor Spirit;6301;24000
+Rennala, Queen of the Full Moon;7590;40000
+Rykard, Lord of Blasphemy;89613;130000
+Starscourge Radahn;9572;70000

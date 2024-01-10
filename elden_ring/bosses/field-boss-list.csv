@@ -1,88 +1,159 @@
-Name;Health
-Abductor Virgins;3811
-Adan, Thief of Fire;1717
-Alabaster Lord;755
-Alecto, Black Knife Ringleader;17482
-Ancient Dragon Lansseax;9087
-Ancient Hero of Zamor;3811
-Astel, Stars of Darkness;18617
-Battlemage Hugues;4095
-Beastman of Farum Azula (Greatsword);8306
-Beastman of Farum Azula (Throwing Knife);3344
-Bell Bearing Hunter;4050
-Black Blade Kindred;8452
-Black Knife Assassin;3312
-Bloodhound Knight;1985
-Bloodhound Knight Darriwil;1450
-Bols, Carian Knight;5109
-Cleanrot Knights;4204
-Commander Niall;15541
-Commander O'Neil;9210
-Crucible Knight;2782
-Crucible Knight Ordovis;5460
-Crucible Knight Siluria;4606
-Crystalians;3190
-Death Bird;5588
-Death Rite Bird;6577
-Demi-Human Chief;1218
-Demi-Human Queen Gilika;3284
-Demi-Human Queen Maggie;7515
-Demi-Human Queen Margot;3971
-Divine Bridge Golem;12010
-Draconic Tree Sentinel;8398
-Elemer of the Briar;4897
-Erdtree Avatar;4690
-Erdtree Burial Watchdog;3419
-Esgar, Priest of Blood;3511
-Fallingstar Beast;7009
-Fell Twins;7205
-Fia's Champions;14650
-Flying Dragon Greyll;11500
-Frenzied Duelist;3079
-Full-Grown Fallingstar Beast;13010
-Glintstone Dragon Smarag;6069
-God-Devouring Serpent;30439
-Godefroy the Grafted;12419
-Godfrey, First Elden Lord (Golden Shade);7099
-Godskin Apostle;7528
-Godskin Noble;9031
-Grafted Scion;3724
-Grave Warden Duelist;6240
-Great Wyrm Theodorix;25649
-Guardian Golem;5974
-Kindred of Rot;2034
-Lion Guardian;3440
-Loretta, Knight of the Haligtree;13397
-Mad Pumpkin Head;2800
-Magma Wyrm;12243
-Magma Wyrm Makar;7141
-Mimic Tear;19536
-Miranda, the Blighted Bloom;2483
-Misbegotten Crusader;9130
-Misbegotten Warrior;3560
-Mohg, the Omen;14000
-Necromancer Garris;3202
-Night's Cavalry;3269
-Nox Swordstress & Nox Priest;3262
-Omenkiller;2306
-Onyx Lord;4907
-Patches;1191
-Perfumer Tricia;988
-Putrid Avatar;5671
-Putrid Grave Warden Duelist;8800
-Putrid Tree Spirit;11191
-Red Wolf of the Champion;3162
-Roundtable Knight Vyke;7500
-Royal Knight Loretta;4214
-Royal Revenant;3077
-Runebear;3311
-Sanguine Noble;3128
-Scaly Misbegotten;1360
-Sir Gideon Ofnir, the All-Knowing;6226
-Soldier of Godrick;384
-Spirit-Caller Snail;1722
-Stonedigger Troll;3050
-Tibia Mariner;5155
-Tree Sentinel;2889
-Ulcerated Tree Spirit;6147
-Wormface;5876
+Name;Health;Runes
+Abductor Virgins;7622;10000
+Adan, Thief of Fire;1717;3800
+Alabaster Lord;755;3600
+Alecto, Black Knife Ringleader;17482;88000
+Ancient Dragon Lansseax;9087;60000
+Ancient Hero of Zamor;2570;5400
+Ancient Hero of Zamor;3811;20000
+Ancient Hero of Zamor;6868;83000
+Astel, Stars of Darkness;18617;120000
+Battlemage Hugues;4095;7800
+Beastman of Farum Azula;1417;1000
+Beastmen of Farum Azula (Greatsword);11650;65000
+Bell Bearing Hunter;2495;2700
+Bell Bearing Hunter;4050;6000
+Bell Bearing Hunter;6216;20000
+Bell Bearing Hunter;10619;50000
+Black Blade Kindred;12297;88000
+Black Blade Kindred;8452;60000
+Black Knife Assassin;1668;1600
+Black Knife Assassin;3312;4200
+Black Knife Assassin;3928;9000
+Black Knife Assassin;5412;10800
+Bloodhound Knight;1985;2700
+Bloodhound Knight Darriwil;1450;1900
+Bols, Carian Knight;5109;4600
+Cleanrot Knight;1980;3300
+Cleanrot Knights;4204;7000
+Commander Niall;15541;90000
+Commander O'Neil;9210;12000
+Crucible Knight;2782;2100
+Crucible Knight;1391;1613
+Crucible Knight;2730;3080
+Crucible Knight;3110;3840
+Crucible Knight;5512;7360
+Crucible Knight Ordovis;10920;28000
+Crucible Knight Siluria;4606;25000
+Crystlian;1595;3000
+Crystalians;3190;3300
+Crystalians;3984;9000
+Death Bird;3442;2800
+Death Bird;3769;3900
+Death Bird;5588;6600
+Death Bird;8575;29000
+Death Rite Bird;6577;7800
+Death Rite Bird;7952;15000
+Death Rite Bird;16059;77000
+Death Rite Bird;17625;220000
+Demi-Human Chiefs;1218;1200
+Demi-Human Queen Gilika;3284;8500
+Demi-Human Queen Maggie;7515;13000
+Demi-Human Queen Margot;3971;11000
+Divine Bridge Golem;12010;3927
+Draconic Tree Sentinel;8398;50000
+Draconic Tree Sentinel;13362;28080
+Elemer of the Briar;4897;24000
+Erdtree Avatar;3163;3600
+Erdtree Avatar;4690;4350
+Erdtree Avatar;4690;5800
+Erdtree Avatar;6461;10062
+Erdtree Avatar;7198;10621
+Erdtree Avatar;11452;70000
+Erdtree Burial Watchdog;1200;1300
+Erdtree Burial Watchdog;1347;2400
+Erdtree Burial Watchdog;2383;3200
+Erdtree Burial Watchdog;3419;12000
+Erdtree Burial Watchdogs;5062;7400
+Esgar, Priest of Blood;3511;22500
+Fallingstar Beast;4554;7600
+Fallingstar Beast;7009;11000
+Fell Twins;14410;29000
+Fia's Champions;14650;40000
+Flying Dragon Greyll;11500;80000
+Frenzied Duelist;3079;6700
+Full-Grown Fallingstar Beast;13010;21000
+Glintstone Dragon Smarag;6069;14000
+God-Devouring Serpent;30439;130000
+Godefroy the Grafted;12419;26000
+Godfrey, First Elden Lord (Golden Shade);7099;80000
+Godskin Apostle;7528;14000
+Godskin Apostle;13596;94000
+Godskin Noble;10060;50000
+Godskin Noble;9031;4810
+Grafted Scion;2596;3200
+Grafted Scions;5192;583
+Grafted Scion;1897;1176
+Grafted Scion;2596;1283
+Grafted Scion;3724;2313
+Grave Warden Duelist;2190;1700
+Grave Warden Duelist;6240;15000
+Great Wyrm Theodorix;25649;180000
+Guardian Golem;5974;1700
+Kindred of Rot;4068;10000
+Lion Guardian;2119;1138
+Loretta, Knight of the Haligtree;13397;200000
+Mad Pumpkin Head;1328;1100
+Mad Pumpkin Heads;5600;6300
+Magma Wyrm;7141;7500
+Magma Wyrm;12243;19000
+Magma Wyrm;12243;5044
+Magma Wyrm Makar;7141;24000
+Mimic Tear;19536;10000
+Miranda, the Blighted Bloom;2483;2100
+Misbegotten Crusader;9130;93000
+Misbegotten Warrior;3560;9400
+Mohg, the Omen;14000;100000
+Necromancer Garris;3202;9000
+Night's Cavalry;1665;2400
+Night's Cavalry;1823;3400
+Night's Cavalry;2704;5600
+Night's Cavalry;2704;4200
+Night's Cavalry;3269;8500
+Night's Cavalry;3725;10000
+Night's Cavalry;6602;36000
+Night's Cavalry;7089;42000
+Night's Cavalry;14492;84000
+Nox Swordstress & Nox Priest;3262;6400
+Omenkiller;2306;4900
+Onyx Lord;4058;3600
+Onyx Lord;4907;16000
+Patches;1191;800
+Perfumer Tricia;4557;9400
+Putrid Avatar;5671;9600
+Putrid Avatar;12297;91000
+Putrid Avatar;12569;160000
+Putrid Avatar;12787;27090
+Putrid Grave Warden Duelist;8800;78000
+Putrid Tree Spirit;18144;64000
+Putrid Tree Spirit;11191;11193
+Putrid Tree Spirit;19880;26460
+Red Wolf of the Champion;3162;21000
+Roundtable Knight Vyke;7500;75000
+Royal Knight Loretta;4214;7500
+Royal Revenant;3077;3100
+Runebear;3311;2600
+Sanguine Noble;3128;8800
+Scaly Misbegotten;1360;2000
+Sir Gideon Ofnir, the All-Knowing;150000
+Soldier of Godrick;384;400
+Spirit-Caller Snail;3145;3000
+Spirit-Caller Snail;23501;70000
+Stonedigger Troll;1295;1800
+Stonedigger Troll;3050;9600
+Tibia Mariner;3176;2400
+Tibia Mariner;5155;4700
+Tibia Mariner;7911;14000
+Tibia Mariner;9290;4234
+Tree Sentinel;2889;3200
+Tree Sentinels;11845;20000
+Ulcerated Tree Spirit;6147;15000
+Ulcerated Tree Spirit;4492;4736
+Ulcerated Tree Spirit;11191;18000
+Ulcerated Tree Spirit;8817;8820
+Ulcerated Tree Spirit;10046;9828
+Ulcerated Tree Spirit;13141;48000
+Ulcerated Tree Spirit;18144;18749
+Wormface;5876;10000
+Wormface;5157;2937
+Wormface;10415;6812
