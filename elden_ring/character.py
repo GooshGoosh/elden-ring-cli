@@ -87,12 +87,12 @@ class Character:
         boss. Round the damage number up to the nearest whole number.
     """
 
-    def __init__(self):
+    def __init__(self, path):
         # Paths for the directory/file that contains the classes and
         # the starter weapons for each class.
-        self._classes_path = os.path.abspath('./classes/')
-        self._starter_weapons_path = os.path.abspath( \
-            './weapons/starter-weapons.json')
+        self._classes_path = os.path.join(os.path.dirname(path), 'classes/')
+        self._starter_weapons_path = os.path.join(os.path.dirname(path),
+                                                  'weapons/starter-weapons.json')
 
         self._player_max_health = 0
         self._player_current_health = 0

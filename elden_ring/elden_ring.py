@@ -3,7 +3,7 @@
 
 
 """
-eldenRingOOP.py - Mini Elden Ring-based game that lets the user
+elden_ring.py - Mini Elden Ring-based game that lets the user
 the tutorial boss Solder of Godrick and a majority of the field,
 mini, and main bosses from Elden Ring. Uses a random die roll of
 1-20 to decide if the Tarnished was able to attack the boss and
@@ -20,6 +20,7 @@ including Right Hand, Left Hand, Helm, Torso, Wrists, and Legs.
 import random
 import sys
 import time
+import os
 try:
     import pyinputplus as pyip
 except ImportError:
@@ -33,7 +34,8 @@ except ImportError:
     sys.exit(1)
 
 
-PLAYER_REST_TIME = 2.5
+PATH = os.path.abspath(__file__)    # Current directory of the executing file.
+PLAYER_REST_TIME = 2.5              # Amount of time to wait for players to rest.
 
 def roll_d20(advantage=False, disadvantage=False):
     """roll_d20 Generate a random number in the range 1-20 (inclusive) and
@@ -800,8 +802,8 @@ def single_player_game():
     Includes the tutorial boss fight as well as a single field, mini and main
     boss fight.
     """
-    player_one = character.Character() # Create the player object.
-    boss_one = boss.Boss()             # Create the boss object.
+    player_one = character.Character(PATH) # Create the player object.
+    boss_one = boss.Boss(PATH)             # Create the boss object.
     player_one.print_stats() # Display the player's stats.
 
     tutorial_boss_fight(player_one, boss_one) # Begin the tutorial boss fight.
@@ -825,10 +827,10 @@ def two_player_game():
     boss fight. This version will exit the program early if the host object
     reaches 0 hp.
     """
-    host = character.Character()          # Create the host object.
-    summon_one = character.Character()     # Create the first summon object.
+    host = character.Character(PATH)          # Create the host object.
+    summon_one = character.Character(PATH)     # Create the first summon object.
     players = [host, summon_one] # Create the player list.
-    boss_one = boss.Boss()    # Create the boss object.
+    boss_one = boss.Boss(PATH)    # Create the boss object.
 
     host.print_stats()          # Display the host's stats.
     print()
@@ -862,11 +864,11 @@ def three_player_game():
     boss fight. This version will exit the program early if the host object
     reaches 0 hp.
     """
-    host = character.Character()            # Create the host object.
-    summon_one = character.Character()       # Create the first summon object.
-    summon_two = character.Character()       # Create the second summon object.
+    host = character.Character(PATH)            # Create the host object.
+    summon_one = character.Character(PATH)       # Create the first summon object.
+    summon_two = character.Character(PATH)       # Create the second summon object.
     players = [host, summon_one, summon_two]  # Create the player list.
-    boss_one = boss.Boss()    # Create the boss object.
+    boss_one = boss.Boss(PATH)    # Create the boss object.
 
     host.print_stats()          # Display the host's stats.
     print()

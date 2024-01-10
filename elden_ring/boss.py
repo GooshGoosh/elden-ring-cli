@@ -77,9 +77,8 @@ class Boss():
         player. Round the damage number up to nearest whole number.
 
     """
-    _bosses_path = os.path.abspath('./bosses/')
 
-    def __init__(self):
+    def __init__(self, path):
         # Set the starter/tutorial boss name, health, attack, and armor.
         self._boss_name = 'Soldier of Godrick'
         self._boss_health = math.ceil(384 / 2)
@@ -88,6 +87,7 @@ class Boss():
         self._file_path = ''
         self._df = pd.DataFrame()
         self._boss_data = pd.DataFrame()
+        self._bosses_path = os.path.join(os.path.dirname(path), 'bosses')
 
     def set_field_boss(self):
         """set_field_boss Sets the stats for a boss from the field-boss-list
@@ -95,7 +95,7 @@ class Boss():
         to use as the boss name and health.
         """
         # Set the boss file path, attack, and armor.
-        self._file_path = os.path.join(Boss._bosses_path,
+        self._file_path = os.path.join(self._bosses_path,
                                        'field-boss-list.csv')
         self._boss_attack = 15
         self._boss_armor = 9
@@ -123,7 +123,7 @@ class Boss():
         to use as the boss name and health.
         """
         # Set the boss file path, attack, and armor.
-        self._file_path = os.path.join(Boss._bosses_path,
+        self._file_path = os.path.join(self._bosses_path,
                                        'mini-boss-list.csv')
         self._boss_attack = 20
         self._boss_armor = 11
@@ -151,7 +151,7 @@ class Boss():
         to use as the boss name and health.
         """
         # Set the boss file path, attack, and armor.
-        self._file_path = os.path.join(Boss._bosses_path,
+        self._file_path = os.path.join(self._bosses_path,
                                        'main-boss-list.csv')
         self._boss_attack = 25
         self._boss_armor = 13
