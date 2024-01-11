@@ -44,6 +44,8 @@ class Boss():
         The boss' attack value.
     _boss_armor: int
         The boss' armor value.
+    _boss_runes: int
+        The number of runes that the boss will drop upon defeat.
     _file_path: str
         A string to represent the file for the boss category. The string
         is joined to the _bosses_path attribute.
@@ -69,6 +71,8 @@ class Boss():
         Returns the armor value of the boss object.
     get_name()
         Returns the name of the boss object.
+    get_runes()
+        Returns the runes value of the boss object.
     reduce_health(damage=0)
         Subtracts the current value of _boss_health by the value
         given to the damage parameter.
@@ -79,11 +83,12 @@ class Boss():
     """
 
     def __init__(self, path):
-        # Set the starter/tutorial boss name, health, attack, and armor.
+        # Set the starter/tutorial boss name, health, attack, armor and runes.
         self._boss_name = 'Soldier of Godrick'
         self._boss_health = math.ceil(384 / 2)
         self._boss_attack = 10
         self._boss_armor = 7
+        self._boss_runes = 400
         self._file_path = ''
         self._df = pd.DataFrame()
         self._boss_data = pd.DataFrame()
@@ -108,6 +113,7 @@ class Boss():
             self._boss_name = self._boss_data.iloc[0,0]
             self._boss_health = math.ceil(self._boss_data.iloc[0,1]
                                           / 4)
+            self._boss_runes = self._boss_data.iloc[0,2]
         except FileNotFoundError:
             print(f'\nFile {self._file_path} not found! Exiting...')
             time.sleep(1.5)
@@ -136,6 +142,7 @@ class Boss():
             self._boss_name = self._boss_data.iloc[0,0]
             self._boss_health = math.ceil(self._boss_data.iloc[0,1]
                                           / 6)
+            self._boss_runes = self._boss_data.iloc[0,2]
         except FileNotFoundError:
             print(f'\nFile {self._file_path} not found! Exiting...')
             time.sleep(1.5)
@@ -164,6 +171,7 @@ class Boss():
             self._boss_name = self._boss_data.iloc[0,0]
             self._boss_health = math.ceil(self._boss_data.iloc[0,1]
                                           / 8)
+            self._boss_runes = self._boss_data.iloc[0,2]
         except FileNotFoundError:
             print(f'\nFile {self._file_path} not found! Exiting...')
             time.sleep(1.5)
@@ -202,6 +210,14 @@ class Boss():
             str: The boss' name.
         """
         return self._boss_name
+
+    def get_runes(self):
+        """get_runes Return the runes value of the boss
+
+        Returns:
+            int: The number of runes the boss will drop upon defeat.
+        """
+        return self._boss_runes
 
     def reduce_health(self, damage = 0):
         """reduce_health Reduce the boss' health value.

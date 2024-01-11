@@ -113,7 +113,7 @@ def boss_attack_phase(player_obj, boss_obj):
         player_obj.reduce_health(dmg)
         print(f'Hit {player_obj.get_name()} for {dmg} damage!')
         # Allow the player to interactively proceed to the next phase.
-        input("Press 'ENTER' to continue...")
+        input("\nPress 'ENTER' to continue...")
 
 
 def tutorial_boss_fight(player_obj, boss_obj):
@@ -126,6 +126,8 @@ def tutorial_boss_fight(player_obj, boss_obj):
         player_obj (character.Character): Object of the player in the fight.
         boss_obj (boss.Boss): Object of the boss in the fight.
     """
+    # Set the boss' runes to drop if defeated.
+    runes = boss_obj.get_runes()
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print(f'Begin fight VS {boss_obj.get_name()}')
@@ -135,8 +137,9 @@ def tutorial_boss_fight(player_obj, boss_obj):
     while player_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        player_obj.print_health()    # Display the player's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        player_obj.print_health()   # Display the player's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(player_obj, boss_obj)
@@ -153,8 +156,15 @@ def tutorial_boss_fight(player_obj, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    player_obj.add_runes(runes)
+    print(f'You currently have {player_obj.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def two_player_tutorial_boss_fight(player_list, boss_obj):
@@ -171,6 +181,8 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
     host_obj = player_list[0]
     summon_one = player_list[1]
 
+    # Set the boss' runes to drop if defeated.
+    runes = boss_obj.get_runes()
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print('Begin fight VS {boss_obj.get_name()}')
@@ -180,9 +192,10 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin host attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -211,8 +224,17 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def three_player_tutorial_boss_fight(player_list, boss_obj):
@@ -230,6 +252,8 @@ def three_player_tutorial_boss_fight(player_list, boss_obj):
     summon_one = player_list[1]
     summon_two = player_list[2]
 
+    # Set the boss' runes to drop if defeated.
+    runes = boss_obj.get_runes()
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print(f'Begin fight VS {boss_obj.get_name()}')
@@ -239,10 +263,11 @@ def three_player_tutorial_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's hp.
-        summon_two.print_health()    # Display the second summon's hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's hp.
+        summon_two.print_health()   # Display the second summon's hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin host attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -280,8 +305,19 @@ def three_player_tutorial_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    summon_two.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    print(f'{summon_two.get_name()} currently has {summon_two.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def field_boss_fight(player_obj, boss_obj):
@@ -294,6 +330,7 @@ def field_boss_fight(player_obj, boss_obj):
     """
     # Set the boss stats to the stats appropriate for a field boss.
     boss_obj.set_field_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -304,8 +341,9 @@ def field_boss_fight(player_obj, boss_obj):
     while player_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        player_obj.print_health()    # Display the player's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        player_obj.print_health()   # Display the player's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(player_obj, boss_obj)
@@ -322,8 +360,15 @@ def field_boss_fight(player_obj, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    player_obj.add_runes(runes)
+    print(f'You currently have {player_obj.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def two_player_field_boss_fight(player_list, boss_obj):
@@ -340,6 +385,7 @@ def two_player_field_boss_fight(player_list, boss_obj):
 
     # Set the boss stats to the stats appropriate for a field boss.
     boss_obj.set_field_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -350,9 +396,10 @@ def two_player_field_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -381,8 +428,17 @@ def two_player_field_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def three_player_field_boss_fight(player_list, boss_obj):
@@ -400,6 +456,7 @@ def three_player_field_boss_fight(player_list, boss_obj):
 
     # Set the boss stats to the stats appropriate for a field boss.
     boss_obj.set_field_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -410,10 +467,11 @@ def three_player_field_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's current hp.
-        summon_two.print_health()    # Display the second summon's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's current hp.
+        summon_two.print_health()   # Display the second summon's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -451,8 +509,19 @@ def three_player_field_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    summon_two.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    print(f'{summon_two.get_name()} currently has {summon_two.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def mini_boss_fight(player_obj, boss_obj):
@@ -465,6 +534,7 @@ def mini_boss_fight(player_obj, boss_obj):
     """
     # Set the boss stats to the stats appropriate for a mini boss.
     boss_obj.set_mini_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -475,8 +545,9 @@ def mini_boss_fight(player_obj, boss_obj):
     while player_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        player_obj.print_health()    # Display the player's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        player_obj.print_health()   # Display the player's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(player_obj, boss_obj)
@@ -493,8 +564,15 @@ def mini_boss_fight(player_obj, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    player_obj.add_runes(runes)
+    print(f'You currently have {player_obj.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def two_player_mini_boss_fight(player_list, boss_obj):
@@ -511,6 +589,7 @@ def two_player_mini_boss_fight(player_list, boss_obj):
 
     # Set the boss stats to the stats appropriate for a mini boss.
     boss_obj.set_mini_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -521,9 +600,10 @@ def two_player_mini_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -552,8 +632,17 @@ def two_player_mini_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def three_player_mini_boss_fight(player_list, boss_obj):
@@ -571,6 +660,7 @@ def three_player_mini_boss_fight(player_list, boss_obj):
 
     # Set the boss stats to the stats appropriate for a mini boss.
     boss_obj.set_mini_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -581,10 +671,11 @@ def three_player_mini_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's current hp.
-        summon_two.print_health()    # Display the second summon's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's current hp.
+        summon_two.print_health()   # Display the second summon's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -622,8 +713,19 @@ def three_player_mini_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    summon_two.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    print(f'{summon_two.get_name()} currently has {summon_two.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to rest...")
+    input("\nPress'ENTER' to rest...")
 
 
 def main_boss_fight(player_obj, boss_obj):
@@ -636,6 +738,7 @@ def main_boss_fight(player_obj, boss_obj):
     """
     # Set the boss stats to the stats appropriate for a main boss.
     boss_obj.set_main_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -646,8 +749,9 @@ def main_boss_fight(player_obj, boss_obj):
     while player_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        player_obj.print_health()    # Display the player's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        player_obj.print_health()   # Display the player's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(player_obj, boss_obj)
@@ -664,8 +768,15 @@ def main_boss_fight(player_obj, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    player_obj.add_runes(runes)
+    print(f'You currently have {player_obj.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the exit action interactive for the player.
-    input("Press'ENTER' to end journey...")
+    input("\nPress'ENTER' to end journey...")
 
 
 def two_player_main_boss_fight(player_list, boss_obj):
@@ -682,6 +793,7 @@ def two_player_main_boss_fight(player_list, boss_obj):
 
     # Set the boss stats to the stats appropriate for a main boss.
     boss_obj.set_main_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -692,9 +804,10 @@ def two_player_main_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -723,8 +836,17 @@ def two_player_main_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to end journey...")
+    input("\nPress'ENTER' to end journey...")
 
 
 def three_player_main_boss_fight(player_list, boss_obj):
@@ -742,6 +864,7 @@ def three_player_main_boss_fight(player_list, boss_obj):
 
     # Set the boss stats to the stats appropriate for a main boss.
     boss_obj.set_main_boss()
+    runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -752,10 +875,11 @@ def three_player_main_boss_fight(player_list, boss_obj):
     while host_obj.get_health() > 0 and boss_obj.get_health() > 0:
         # Separate the attack phases for easier readability.
         print('\n' + ('-' * 30))
-        host_obj.print_health()      # Display the player's current hp.
-        summon_one.print_health()    # Display the first summon's current hp.
-        summon_two.print_health()    # Display the second summon's current hp.
-        boss_obj.print_stats()       # Display the boss' current hp.
+        host_obj.print_health()     # Display the player's current hp.
+        summon_one.print_health()   # Display the first summon's current hp.
+        summon_two.print_health()   # Display the second summon's current hp.
+        boss_obj.print_stats()      # Display the boss' current hp.
+        time.sleep(0.75)
 
         # Begin player attack phase.
         player_attack_phase(host_obj, boss_obj)
@@ -793,8 +917,19 @@ def three_player_main_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Update the player's runes value.
+    print(f'You gained {runes} runes.\n')
+    host_obj.add_runes(runes)
+    summon_one.add_runes(runes)
+    summon_two.add_runes(runes)
+    print(f'{host_obj.get_name()} currently has {host_obj.get_runes()} runes.')
+    print(f'{summon_one.get_name()} currently has {summon_one.get_runes()} runes.')
+    print(f'{summon_two.get_name()} currently has {summon_two.get_runes()} runes.')
+    time.sleep(1)
+
     # Make the rest action interactive for the player.
-    input("Press'ENTER' to end journey...")
+    input("\nPress'ENTER' to end journey...")
 
 
 def single_player_game():
