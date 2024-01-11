@@ -49,6 +49,8 @@ class Character:
         The attack value of the player.
     _player_armor: int
         The armor rating/value of the player.
+    _player_runes: int
+        The number of runes in the player's possession.
     _stats: dict
         A dictionary of the player's stats and values.
     _equipment: dict
@@ -77,11 +79,19 @@ class Character:
         Returns the player's armor rating value.
     get_health()
         Returns the player's current health value.
+    get_runes()
+        Returns the player's current runes.
     grace()
         Sets the player's current health value to the player's max health value.
     reduce_health(damage=0)
         Subtracts the player's current health value by the given to the
         damage parameter.
+    add_runes(runes=0)
+        Adds to the player's current runes by the value given to the runes
+        parameter.
+    reduce_runes(runes=0)
+        Subtracts the player's current runes by the value given to the runes
+        parameter.
     attack()
         Perform a d10 die roll to determine the player's damage done to the
         boss. Round the damage number up to the nearest whole number.
@@ -98,6 +108,7 @@ class Character:
         self._player_current_health = 0
         self._player_attack = 0
         self._player_armor = 11
+        self._player_runes = 0
 
         self._stats = {
             'Vig:': 0,
@@ -212,7 +223,7 @@ class Character:
         # Let the player read the chosen class' stats.
         time.sleep(3)
         # Wait for the player to hit 'ENTER' to initiate the first battle.
-        input("Press 'ENTER' to continue...")
+        input("\nPress 'ENTER' to continue...")
 
     def print_health(self):
         """print_health Prints the player's name and current health value.
@@ -248,6 +259,15 @@ class Character:
         # Return the player's current health.
         return self._player_current_health
 
+    def get_runes(self):
+        """get_runes Return the player's current runes.
+
+        Returns:
+            int: The player's current runes.
+        """
+        # Return the player's current runes.
+        return self._player_runes
+
     def grace(self):
         """grace Set the player's current health value to the player's maximum
         health value. Use to heal the player between boss fights.
@@ -274,6 +294,28 @@ class Character:
         # If the player's health is reduced below 0, then set the
         # health value at 0 instead.
         self._player_current_health = max(self._player_current_health, 0)
+
+    def add_runes(self, runes = 0):
+        """add_runes Increases the player's current runes by the amount of the
+        runes value passed.
+
+        Args:
+            runes (int, optional): The number of runes to add to the player's
+            current runes. Defaults to 0.
+        """
+        # Increase the player's runes by the value given.
+        self._player_runes += runes
+
+    def reduce_runes(self, runes = 0):
+        """reduce_runes Reduce the player's current runes by the amount of the
+        runes value passed.
+
+        Args:
+            runes (int, optional): The number of runes to subtract from the
+            player's current runes. Defaults to 0.
+        """
+        # Decrease the player's runes by the value given.
+        self._player_runes -= runes
 
     def attack(self):
         """attack Perform a d10 die roll to determine the player's damage done
