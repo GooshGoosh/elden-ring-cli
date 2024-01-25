@@ -1,6 +1,3 @@
-# Author: Alex Grecinger
-# Copyright (C) 2023 Alex Grecinger
-
 """
 This module is responsible for the Character object in the eldenRing.py program.
 The character's stats and actions are controlled through character.py via the
