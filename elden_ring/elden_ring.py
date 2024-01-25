@@ -1,7 +1,3 @@
-# Author: Alex Grecinger
-# Copyright (C) 2023 Alex Grecinger
-
-
 """
 elden_ring.py - Mini Elden Ring-based game that lets the user
 the tutorial boss Solder of Godrick and a majority of the field,
