@@ -2,22 +2,22 @@
 	"Class": "Warrior",
 	"Stats":
 		{
-			"Vig:": 11,
-			"Mnd:": 12,
-			"End:": 11,
-			"Str:": 10,
-			"Dex:": 16,
-			"Int:": 10,
-			"Fth:": 8,
-			"Arc:": 9
+			"Vig": 11,
+			"Mnd": 12,
+			"End": 11,
+			"Str": 10,
+			"Dex": 16,
+			"Int": 10,
+			"Fth": 8,
+			"Arc": 9
 		},
 	"Equipment":
 		{
-			"Right Hand:": "Scimitar",
-			"Left Hand:": "Scimitar",
-			"Helm:": "Blue Cloth Cowl",
-			"Torso:": "Blue Cloth Cowl",
-			"Wrists:": "Warrior Gauntlets",
-			"Legs:": "Warrior Greaves"
+			"Right Hand": "Scimitar",
+			"Left Hand": "Scimitar",
+			"Helm": "Blue Cloth Cowl",
+			"Torso": "Blue Cloth Cowl",
+			"Wrists": "Warrior Gauntlets",
+			"Legs": "Warrior Greaves"
 		}
 }

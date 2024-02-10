@@ -2,22 +2,22 @@
 	"Class": "Hero",
 	"Stats":
 		{
-			"Vig:": 14,
-			"Mnd:": 9,
-			"End:": 12,
-			"Str:": 16,
-			"Dex:": 9,
-			"Int:": 7,
-			"Fth:": 8,
-			"Arc:": 11
+			"Vig": 14,
+			"Mnd": 9,
+			"End": 12,
+			"Str": 16,
+			"Dex": 9,
+			"Int": 7,
+			"Fth": 8,
+			"Arc": 11
 		},
 	"Equipment":
 		{
-			"Right Hand:": "Battle Axe",
-			"Left Hand:": "Large Leather Shield",
-			"Helm:": "Champion Headband",
-			"Torso:": "Champion Pauldron",
-			"Wrists:": "Champion Bracers",
-			"Legs:": "Champion Gaiters"
+			"Right Hand": "Battle Axe",
+			"Left Hand": "Large Leather Shield",
+			"Helm": "Champion Headband",
+			"Torso": "Champion Pauldron",
+			"Wrists": "Champion Bracers",
+			"Legs": "Champion Gaiters"
 		}
 }

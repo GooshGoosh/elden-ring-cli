@@ -2,22 +2,22 @@
 	"Class": "Prophet",
 	"Stats":
 		{
-			"Vig:": 10,
-			"Mnd:": 14,
-			"End:": 8,
-			"Str:": 11,
-			"Dex:": 10,
-			"Int:": 7,
-			"Fth:": 16,
-			"Arc:": 10
+			"Vig": 10,
+			"Mnd": 14,
+			"End": 8,
+			"Str": 11,
+			"Dex": 10,
+			"Int": 7,
+			"Fth": 16,
+			"Arc": 10
 		},
 	"Equipment":
 		{
-			"Right Hand:": "Short Spear",
-			"Left Hand:": "Rickety Shield",
-			"Helm:": "Prophet Blindfold",
-			"Torso:": "Prophet Robe",
-			"Wrists:": "",
-			"Legs:": "Prophet Trousers"
+			"Right Hand": "Short Spear",
+			"Left Hand": "Rickety Shield",
+			"Helm": "Prophet Blindfold",
+			"Torso": "Prophet Robe",
+			"Wrists": "",
+			"Legs": "Prophet Trousers"
 		}
 }			
