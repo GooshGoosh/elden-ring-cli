@@ -2,23 +2,23 @@
 	"Class": "Bandit",
 	"Stats":
 		{
-			"Vig:": 10,
-			"Mnd:": 11,
-			"End:": 10,
-			"Str:": 9,
-			"Dex:": 13,
-			"Int:": 9,
-			"Fth:": 8,
-			"Arc:": 14
+			"Vig": 10,
+			"Mnd": 11,
+			"End": 10,
+			"Str": 9,
+			"Dex": 13,
+			"Int": 9,
+			"Fth": 8,
+			"Arc": 14
 		},
 	"Equipment":
 		{
-			"Right Hand:": "Great Knife",
-			"Left Hand:": "Buckler",
-			"Helm:": "Bandit Mask",
-			"Torso:": "Bandit Garb",
-			"Wrists:": "Bandit Manchettes",
-			"Legs:": "Bandit Boots"
+			"Right Hand": "Great Knife",
+			"Left Hand": "Buckler",
+			"Helm": "Bandit Mask",
+			"Torso": "Bandit Garb",
+			"Wrists": "Bandit Manchettes",
+			"Legs": "Bandit Boots"
 		}
 }
 

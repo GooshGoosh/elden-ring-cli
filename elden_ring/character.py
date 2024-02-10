@@ -66,6 +66,8 @@ class Character:
 
     Methods
     -------
+    read_stats()
+        Reads the player's stats and updates their max health and attack.
     print_stats()
         Prints the player's stats.
     print_health()
@@ -78,6 +80,8 @@ class Character:
         Returns the player's current health value.
     get_runes()
         Returns the player's current runes.
+    increase_player_level()
+        Increase the player's chosen stat.
     grace()
         Sets the player's current health value to the player's max health value.
     reduce_health(damage=0)
@@ -108,23 +112,23 @@ class Character:
         self._player_runes = 0
 
         self._stats = {
-            'Vig:': 0,
-            'Mnd:': 0,
-            'End:': 0,
-            'Str:': 0,
-            'Dex:': 0,
-            'Int:': 0,
-            'Fth:': 0,
-            'Arc:': 0
+            'Vig': 0,
+            'Mnd': 0,
+            'End': 0,
+            'Str': 0,
+            'Dex': 0,
+            'Int': 0,
+            'Fth': 0,
+            'Arc': 0
         }   # Dictionary to store the player's stats.
 
         self._equipment = {
-            'Right Hand:': "",
-            'Left Hand:': "",
-            'Helm:': "",
-            'Torso:': "",
-            'Wrists:': "",
-            'Legs:': ""
+            'Right Hand': "",
+            'Left Hand': "",
+            'Helm': "",
+            'Torso': "",
+            'Wrists': "",
+            'Legs': ""
         }   # Dictionary to store the player's currently equipped gear.
 
         # _self.inventory = {}   Dictionary to track the player's inventory.
@@ -157,48 +161,78 @@ class Character:
         self._character_path = os.path.join(self._classes_path, \
                                             self._character.lower() + '.json')
         try:
-            with open(self._character_path, 'r', encoding="utf-8") as file:
-                self._class_data = json.load(file)
+            with open(self._character_path, 'r', encoding="UTF-8") as file:
+                class_data = json.load(file)
         except FileNotFoundError:
             print(f'\nFile {self._character_path} not found! Exiting...')
             sys.exit(1)
 
-        for k, v in self._class_data['Stats'].items():
+        for k, v in class_data['Stats'].items():
             # Store the player's stats in the _stats dict.
             self._stats[k] = v
 
-        for k, v in self._class_data['Equipment'].items():
-            # Fill the slots for the player's equipment in the
-            # _equipment dict.
+        for k, v in class_data['Equipment'].items():
+            # Fill the slots for the player's equipment in the _equipment dict.
             self._equipment[k] = v
 
         # Search through the starter weapons file to find the weapon that is
         # in the player's right hand and give the player that weapon's attack
         # rating.
         try:
-            with open(self._starter_weapons_path, 'r', encoding="utf-8") as file:
-                self._weapon_reader = json.load(file)
+            with open(self._starter_weapons_path, 'r', encoding="UTF-8") as file:
+                weapon_reader = json.load(file)
         except FileNotFoundError:
             print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
             sys.exit(1)
 
-        for k, v in self._weapon_reader.items():
-            if k == self._equipment['Right Hand:']:
+        for k, v in weapon_reader.items():
+            if k == self._equipment['Right Hand']:
                 self._player_attack = int(v)
             # If the player is holding another weapon in their left hand, then
             # increase the player's attack rating by half of the left-handed
             # weapon.
-            if k == self._equipment['Left Hand:']:
+            if k == self._equipment['Left Hand']:
                 self._player_attack += (int(v) // 2)
+
+        # Increase the player's attack by their Str and Dex stat.
+        self._player_attack += (self._stats['Str'] + self._stats['Dex'])
 
         # Get the player's max health and set their current health equal to
         # their max health.
-        self._player_max_health = self._stats['Vig:'] * 10
+        self._player_max_health = self._stats['Vig'] * 10
         self._player_current_health = self._player_max_health
 
         # Determine if the player has a shielf in their left hand.
-        if "shield" or "buckler" in self._equipment['Left Hand:'].lower():
+        if "shield" or "buckler" in self._equipment['Left Hand'].lower():
             self._player_armor = 13
+
+    def read_stats(self):
+        """read_stats Reads the player's stats and updates their max health and
+        attacked based on their Vig, Str, and Dex.
+        """
+        self._player_max_health = self._stats['Vig'] * 10
+
+        # Search through the starter weapons file to find the weapon that is
+        # in the player's right hand and give the player that weapon's attack
+        # rating.
+        try:
+            with open(self._starter_weapons_path, 'r', encoding="UTF-8") as file:
+                weapon_reader = json.load(file)
+        except FileNotFoundError:
+            print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
+            sys.exit(1)
+
+        for k, v in weapon_reader.items():
+            if k == self._equipment['Right Hand']:
+                self._player_attack = int(v)
+            # If the player is holding another weapon in their left hand, then
+            # increase the player's attack rating by half of the left-handed
+            # weapon.
+            if k == self._equipment['Left Hand']:
+                self._player_attack += (int(v) // 2)
+
+        # Increase the player's attack by their Str and Dex stat.
+        self._player_attack += (self._stats['Str'] + self._stats['Dex'])
 
     def print_stats(self):
         """print_stats Prints the player's class, stats and current equipment.
@@ -207,14 +241,14 @@ class Character:
         print(f'Name: {self._player_name}\n')
         print(f'Class: {self._character}\n')
         for k, v in self._stats.items():
-            print(k.ljust(7, ' ') + str(v))
+            print((k +":").ljust(7, ' ') + str(v))
         print(f'\nHP: {self._player_max_health}')
         print(f'Attack: {self._player_attack}')
         print('-' * 30)
 
         # Print the player's currently equipped items.
         for k, v in self._equipment.items():
-            print(k.ljust(12, ' ') + v)
+            print((k + ":").ljust(12, ' ') + v)
         print('-' * 30)
 
         # Let the player read the chosen class' stats.
@@ -265,10 +299,46 @@ class Character:
         # Return the player's current runes.
         return self._player_runes
 
-    def grace(self):
-        """grace Set the player's current health value to the player's maximum
-        health value. Use to heal the player between boss fights.
+    def increase_player_level(self):
+        """increase_player_level Lets the player choose a stat to increase to
+        level up their character if they have sufficient runes.
         """
+        if self._player_runes < 10000:
+            print("\nInsufficient runes to level up.")
+            return
+
+        stats = ['Vig', 'Mnd', 'End', 'Str', 'Dex', 'Int', 'Fth', 'Arc']
+        stat_to_inc = pyip.inputMenu(stats, prompt='\nSelect a stat to increase:\n',
+                                     numbered=True)
+        # Increase the player's chosen stat and reduce their current runes.
+        print(f'\n{stat_to_inc} increased from {self._stats[stat_to_inc]}',
+              f'to {self._stats[stat_to_inc] + 1}\n')
+        time.sleep(0.5)
+        self._stats[stat_to_inc] += 1
+        self._player_runes -= 10000
+        self.read_stats()
+
+    def grace(self):
+        """grace Give the player a set of actions to choose from and perform the
+        action chosen. Once the player is done performing actions other than 'Rest',
+        set the player's current health value to the player's maximum health value.
+        Use to heal the player between boss fights.
+        """
+        action = ""
+
+        print(f'\nName: {self._player_name}')
+        print(f'Current runes: {self._player_runes}')
+
+        while action != 'Rest':
+            action = pyip.inputMenu(['Show Stats', 'Level Up', 'Rest'],
+                                    prompt='\nPick an action:\n',
+                                    numbered=True)
+            if action == 'Show Stats':
+                print()
+                self.print_stats()
+            elif action == 'Level Up':
+                self.increase_player_level()
+
         print('\nRest...') # Rest and prepare for the next battle.
         # Heal the player's current health to their max health.
         self._player_current_health = self._player_max_health
