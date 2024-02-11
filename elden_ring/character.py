@@ -11,6 +11,7 @@ import random
 import time
 import sys
 import pyinputplus as pyip
+import pandas as pd
 
 
 def roll_d10():
@@ -103,7 +104,7 @@ class Character:
         # the starter weapons for each class.
         self._classes_path = os.path.join(os.path.dirname(path), 'classes/')
         self._starter_weapons_path = os.path.join(os.path.dirname(path),
-                                                  'weapons/starter-weapons.json')
+                                                  'weapons/unupgraded-weapons.csv')
 
         self._player_max_health = 0
         self._player_current_health = 0
@@ -175,24 +176,30 @@ class Character:
             # Fill the slots for the player's equipment in the _equipment dict.
             self._equipment[k] = v
 
-        # Search through the starter weapons file to find the weapon that is
-        # in the player's right hand and give the player that weapon's attack
-        # rating.
         try:
-            with open(self._starter_weapons_path, 'r', encoding="UTF-8") as file:
-                weapon_reader = json.load(file)
+            self.weapons_df = pd.read_csv(self._starter_weapons_path, sep=';')
+
+            # Get the data for the weapon in the player's right hand and set the
+            # player's attack to that weapon's attack.
+            self.right_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Right Hand']]
+            self._player_attack = int(self.right_hand.iloc[0,2])
+
+            # Get the data for the weapon in the player's left hand.
+            self.left_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Left Hand']]
+            if self.left_hand.iloc[0,1] == "Weapon":
+                # Add half its attack to the player's attack if it is a weapon.
+                self._player_attack += int(self.left_hand.iloc[0,2]) // 2
+            elif self.left_hand.iloc[0,1] == "Shield":
+                # Increase the player's armor if it is a shield.
+                self._player_armor = 13
         except FileNotFoundError:
             print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
+            time.sleep(1.5)
             sys.exit(1)
-
-        for k, v in weapon_reader.items():
-            if k == self._equipment['Right Hand']:
-                self._player_attack = int(v)
-            # If the player is holding another weapon in their left hand, then
-            # increase the player's attack rating by half of the left-handed
-            # weapon.
-            if k == self._equipment['Left Hand']:
-                self._player_attack += (int(v) // 2)
+        except IndexError:
+            print('\nError: Index out of range for weapon data! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
 
         # Increase the player's attack by their Str and Dex stat.
         self._player_attack += (self._stats['Str'] + self._stats['Dex'])
@@ -203,33 +210,40 @@ class Character:
         self._player_current_health = self._player_max_health
 
         # Determine if the player has a shielf in their left hand.
-        if "shield" or "buckler" in self._equipment['Left Hand'].lower():
-            self._player_armor = 13
+        #if "shield" or "buckler" in self._equipment['Left Hand'].lower():
+            #self._player_armor = 13
 
     def read_stats(self):
         """read_stats Reads the player's stats and updates their max health and
         attacked based on their Vig, Str, and Dex.
         """
+        # Set the player's health based on their Vig stat.
         self._player_max_health = self._stats['Vig'] * 10
 
-        # Search through the starter weapons file to find the weapon that is
-        # in the player's right hand and give the player that weapon's attack
-        # rating.
         try:
-            with open(self._starter_weapons_path, 'r', encoding="UTF-8") as file:
-                weapon_reader = json.load(file)
+            self.weapons_df = pd.read_csv(self._starter_weapons_path, sep=';')
+
+            # Get the data for the weapon in the player's right hand and set the
+            # player's attack to that weapon's attack.
+            self.right_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Right Hand']]
+            self._player_attack = int(self.right_hand.iloc[0,2])
+
+            # Get the data for the weapon in the player's left hand.
+            self.left_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Left Hand']]
+            if self.left_hand.iloc[0,1] == "Weapon":
+                # Add half its attack to the player's attack if it is a weapon.
+                self._player_attack += int(self.left_hand.iloc[0,2]) // 2
+            elif self.left_hand.iloc[0,1] == "Shield":
+                # Increase the player's armor if it is a shield.
+                self._player_armor = 13
         except FileNotFoundError:
             print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
+            time.sleep(1.5)
             sys.exit(1)
-
-        for k, v in weapon_reader.items():
-            if k == self._equipment['Right Hand']:
-                self._player_attack = int(v)
-            # If the player is holding another weapon in their left hand, then
-            # increase the player's attack rating by half of the left-handed
-            # weapon.
-            if k == self._equipment['Left Hand']:
-                self._player_attack += (int(v) // 2)
+        except IndexError:
+            print('\nError: Index out of range for weapon data! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
 
         # Increase the player's attack by their Str and Dex stat.
         self._player_attack += (self._stats['Str'] + self._stats['Dex'])

@@ -105,7 +105,7 @@ class Boss():
         # Read the field boss list file and create a list of field bosses.
         # Set the boss name and health.
         try:
-            self._df = pd.read_csv(self._file_path,sep=';')
+            self._df = pd.read_csv(self._file_path, sep=';')
             self._boss_data = self._df.sample()
             self._boss_name = self._boss_data.iloc[0,0]
             self._boss_health = math.ceil(self._boss_data.iloc[0,1]
@@ -134,7 +134,7 @@ class Boss():
         # Read the mini boss list file and create a list of mini bosses.
         # Set the boss name and health.
         try:
-            self._df = pd.read_csv(self._file_path,sep=';')
+            self._df = pd.read_csv(self._file_path, sep=';')
             self._boss_data = self._df.sample()
             self._boss_name = self._boss_data.iloc[0,0]
             self._boss_health = math.ceil(self._boss_data.iloc[0,1]
@@ -163,7 +163,7 @@ class Boss():
         # Read the main boss list file and create a list of main bosses.
         # Set the boss name and health.
         try:
-            self._df = pd.read_csv(self._file_path,sep=';')
+            self._df = pd.read_csv(self._file_path, sep=';')
             self._boss_data = self._df.sample()
             self._boss_name = self._boss_data.iloc[0,0]
             self._boss_health = math.ceil(self._boss_data.iloc[0,1]
