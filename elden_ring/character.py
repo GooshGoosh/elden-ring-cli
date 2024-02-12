@@ -258,6 +258,7 @@ class Character:
             print((k +":").ljust(7, ' ') + str(v))
         print(f'\nHP: {self._player_max_health}')
         print(f'Attack: {self._player_attack}')
+        print(f'Runes: {self._player_runes}')
         print('-' * 30)
 
         # Print the player's currently equipped items.
@@ -319,6 +320,7 @@ class Character:
         """
         if self._player_runes < 10000:
             print("\nInsufficient runes to level up.")
+            print(f'Need {10000 - self._player_runes} to level up.')
             return
 
         stats = ['Vig', 'Mnd', 'End', 'Str', 'Dex', 'Int', 'Fth', 'Arc']
@@ -327,7 +329,8 @@ class Character:
         # Increase the player's chosen stat and reduce their current runes.
         print(f'\n{stat_to_inc} increased from {self._stats[stat_to_inc]}',
               f'to {self._stats[stat_to_inc] + 1}\n')
-        time.sleep(0.5)
+        print(f'Current runes: {self._player_runes}')
+        time.sleep(0.75)
         self._stats[stat_to_inc] += 1
         self._player_runes -= 10000
         self.read_stats()
