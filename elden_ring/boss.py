@@ -43,14 +43,9 @@ class Boss():
         The boss' armor value.
     _boss_runes: int
         The number of runes that the boss will drop upon defeat.
-    _file_path: str
+    _boss_file_path: str
         A string to represent the file for the boss category. The string
         is joined to the _bosses_path attribute.
-    _df: pandas.core.frame.DataFrame
-        A pandas DataFrame holding the data for the boss list csv file.
-    _boss_data: pandas.core.frame.DataFrame
-        A pandas DataFrame holding the name and health value of a sample
-        from the _df attribute.
 
     Methods
     -------
