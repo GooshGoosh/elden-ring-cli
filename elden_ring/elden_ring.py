@@ -75,7 +75,7 @@ def player_attack_phase(player_obj, boss_obj):
     else:
         print('Attack roll success!')
         time.sleep(0.5)
-        input("Press 'ENTER' to roll for damage...")
+        input("\nPress 'ENTER' to roll for damage...")
         time.sleep(0.5)
         # Get the damage done to the boss, reduce the boss' health, and let
         # the player know how much damage was done to the boss.
@@ -101,7 +101,7 @@ def boss_attack_phase(player_obj, boss_obj):
         # Let the player know what steps are happening.
         print('Attack roll success!')
         time.sleep(0.5)
-        print('Rolling for damage...')
+        print('\nRolling for damage...')
         time.sleep(0.5)
         # Get the damage done to the player, reduce the player's health, and
         # let the player know how much damage was done to the player.
@@ -181,7 +181,7 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
     runes = boss_obj.get_runes()
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
-    print('Begin fight VS {boss_obj.get_name()}')
+    print(f'Begin fight VS {boss_obj.get_name()}')
     time.sleep(1)
 
     # Loop until either the player or the boss run out of health.

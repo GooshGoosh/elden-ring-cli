@@ -14,6 +14,9 @@ import pyinputplus as pyip
 import pandas as pd
 
 
+unupgraded_weapons_path = ''
+
+
 def roll_d10():
     """roll_d10 Generates a random number from 1-10 (inclusive).
 
@@ -100,11 +103,13 @@ class Character:
     """
 
     def __init__(self, path):
+        global unupgraded_weapons_path
+
         # Paths for the directory/file that contains the classes and
         # the starter weapons for each class.
-        self._classes_path = os.path.join(os.path.dirname(path), 'classes/')
-        self._starter_weapons_path = os.path.join(os.path.dirname(path),
-                                                  'weapons/unupgraded-weapons.csv')
+        classes_path = os.path.join(os.path.dirname(path), 'classes/')
+        unupgraded_weapons_path = os.path.join(os.path.dirname(path),
+                                               'weapons/unupgraded-weapons.csv')
 
         self._player_max_health = 0
         self._player_current_health = 0
@@ -159,13 +164,13 @@ class Character:
         # Join the path to the classes .json files and the chosen class to get
         # the .json file for the chosen class and load the json file data into
         # classData.
-        self._character_path = os.path.join(self._classes_path, \
+        character_path = os.path.join(classes_path, \
                                             self._character.lower() + '.json')
         try:
-            with open(self._character_path, 'r', encoding="UTF-8") as file:
+            with open(character_path, 'r', encoding="UTF-8") as file:
                 class_data = json.load(file)
         except FileNotFoundError:
-            print(f'\nFile {self._character_path} not found! Exiting...')
+            print(f'\nFile {character_path} not found! Exiting...')
             sys.exit(1)
 
         for k, v in class_data['Stats'].items():
@@ -177,23 +182,23 @@ class Character:
             self._equipment[k] = v
 
         try:
-            self.weapons_df = pd.read_csv(self._starter_weapons_path, sep=';')
+            weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
 
             # Get the data for the weapon in the player's right hand and set the
             # player's attack to that weapon's attack.
-            self.right_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Right Hand']]
-            self._player_attack = int(self.right_hand.iloc[0,2])
+            right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
+            self._player_attack = int(right_hand.iloc[0,2])
 
             # Get the data for the weapon in the player's left hand.
-            self.left_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Left Hand']]
-            if self.left_hand.iloc[0,1] == "Weapon":
+            left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
+            if left_hand.iloc[0,1] == "Weapon":
                 # Add half its attack to the player's attack if it is a weapon.
-                self._player_attack += int(self.left_hand.iloc[0,2]) // 2
-            elif self.left_hand.iloc[0,1] == "Shield":
+                self._player_attack += int(left_hand.iloc[0,2]) // 2
+            elif left_hand.iloc[0,1] == "Shield":
                 # Increase the player's armor if it is a shield.
                 self._player_armor = 13
         except FileNotFoundError:
-            print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
+            print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -209,10 +214,6 @@ class Character:
         self._player_max_health = self._stats['Vig'] * 10
         self._player_current_health = self._player_max_health
 
-        # Determine if the player has a shielf in their left hand.
-        #if "shield" or "buckler" in self._equipment['Left Hand'].lower():
-            #self._player_armor = 13
-
     def read_stats(self):
         """read_stats Reads the player's stats and updates their max health and
         attacked based on their Vig, Str, and Dex.
@@ -221,23 +222,23 @@ class Character:
         self._player_max_health = self._stats['Vig'] * 10
 
         try:
-            self.weapons_df = pd.read_csv(self._starter_weapons_path, sep=';')
+            weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
 
             # Get the data for the weapon in the player's right hand and set the
             # player's attack to that weapon's attack.
-            self.right_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Right Hand']]
-            self._player_attack = int(self.right_hand.iloc[0,2])
+            right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
+            self._player_attack = int(right_hand.iloc[0,2])
 
             # Get the data for the weapon in the player's left hand.
-            self.left_hand = self.weapons_df[self.weapons_df["Name"] == self._equipment['Left Hand']]
-            if self.left_hand.iloc[0,1] == "Weapon":
+            left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
+            if left_hand.iloc[0,1] == "Weapon":
                 # Add half its attack to the player's attack if it is a weapon.
-                self._player_attack += int(self.left_hand.iloc[0,2]) // 2
-            elif self.left_hand.iloc[0,1] == "Shield":
+                self._player_attack += int(left_hand.iloc[0,2]) // 2
+            elif left_hand.iloc[0,1] == "Shield":
                 # Increase the player's armor if it is a shield.
                 self._player_armor = 13
         except FileNotFoundError:
-            print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
+            print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -321,6 +322,7 @@ class Character:
         if self._player_runes < 10000:
             print("\nInsufficient runes to level up.")
             print(f'Need {10000 - self._player_runes} to level up.')
+            time.sleep(0.75)    # Allow player time to read message.
             return
 
         stats = ['Vig', 'Mnd', 'End', 'Str', 'Dex', 'Int', 'Fth', 'Arc']
