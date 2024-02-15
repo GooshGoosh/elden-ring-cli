@@ -12,6 +12,9 @@ import time
 import pandas as pd
 
 
+BOSSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'bosses'))
+
+
 def roll_d10():
     """roll_d10 Generates a random number from 1-10 (inclusive).
 
@@ -29,10 +32,6 @@ class Boss():
 
     Attributes
     ----------
-    _bosses_path: str
-        A string formatted to be the absolute path of the given directory.
-        The directory should always point to the bosses directory in the
-        elden_ring directory.
     _boss_name: str
         The name of the boss.
     _boss_health: int
@@ -43,9 +42,6 @@ class Boss():
         The boss' armor value.
     _boss_runes: int
         The number of runes that the boss will drop upon defeat.
-    _boss_file_path: str
-        A string to represent the file for the boss category. The string
-        is joined to the _bosses_path attribute.
 
     Methods
     -------
@@ -74,15 +70,13 @@ class Boss():
 
     """
 
-    def __init__(self, path):
+    def __init__(self):
         # Set the starter/tutorial boss name, health, attack, armor and runes.
         self._boss_name = 'Soldier of Godrick'
-        self._boss_health = math.ceil(384 / 2)
+        self._boss_health = 2#math.ceil(384 / 2)
         self._boss_attack = 10
         self._boss_armor = 7
         self._boss_runes = 400
-        self._boss_file_path = ''
-        self._bosses_path = os.path.join(os.path.dirname(path), 'bosses')
 
     def set_field_boss(self):
         """set_field_boss Sets the stats for a boss from the field-boss-list
@@ -90,21 +84,20 @@ class Boss():
         to use as the boss name and health.
         """
         # Set the boss file path, attack, and armor.
-        self._boss_file_path = os.path.join(self._bosses_path,
-                                       'field-boss-list.csv')
+        boss_file_path = os.path.join(BOSSES_PATH, 'field-boss-list.csv')
         self._boss_attack = 15
         self._boss_armor = 9
 
         # Read the field boss list file and get a sample of boss data.
         # Set the boss name and health.
         try:
-            boss_data = pd.read_csv(self._boss_file_path, sep=';').sample()
+            boss_data = pd.read_csv(boss_file_path, sep=';').sample()
             self._boss_name = boss_data.iloc[0,0]
             self._boss_health = math.ceil(boss_data.iloc[0,1]
                                           / 4)
             self._boss_runes = boss_data.iloc[0,2]
         except FileNotFoundError:
-            print(f'\nFile {self._boss_file_path} not found! Exiting...')
+            print(f'\nFile {boss_file_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -118,21 +111,20 @@ class Boss():
         to use as the boss name and health.
         """
         # Set the boss file path, attack, and armor.
-        self._boss_file_path = os.path.join(self._bosses_path,
-                                       'mini-boss-list.csv')
+        boss_file_path = os.path.join(BOSSES_PATH, 'mini-boss-list.csv')
         self._boss_attack = 20
         self._boss_armor = 11
 
         # Read the mini boss list file and create a list of mini bosses.
         # Set the boss name and health.
         try:
-            boss_data = pd.read_csv(self._boss_file_path, sep=';').sample()
+            boss_data = pd.read_csv(boss_file_path, sep=';').sample()
             self._boss_name = boss_data.iloc[0,0]
             self._boss_health = math.ceil(boss_data.iloc[0,1]
                                           / 6)
             self._boss_runes = boss_data.iloc[0,2]
         except FileNotFoundError:
-            print(f'\nFile {self._boss_file_path} not found! Exiting...')
+            print(f'\nFile {boss_file_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
@@ -146,21 +138,20 @@ class Boss():
         to use as the boss name and health.
         """
         # Set the boss file path, attack, and armor.
-        self._boss_file_path = os.path.join(self._bosses_path,
-                                       'main-boss-list.csv')
+        boss_file_path = os.path.join(BOSSES_PATH, 'main-boss-list.csv')
         self._boss_attack = 25
         self._boss_armor = 13
 
         # Read the main boss list file and create a list of main bosses.
         # Set the boss name and health.
         try:
-            boss_data = pd.read_csv(self._boss_file_path, sep=';').sample()
+            boss_data = pd.read_csv(boss_file_path, sep=';').sample()
             self._boss_name = boss_data.iloc[0,0]
             self._boss_health = math.ceil(boss_data.iloc[0,1]
                                           / 8)
             self._boss_runes = boss_data.iloc[0,2]
         except FileNotFoundError:
-            print(f'\nFile {self._boss_file_path} not found! Exiting...')
+            print(f'\nFile {boss_file_path} not found! Exiting...')
             time.sleep(1.5)
             sys.exit(1)
         except IndexError:
