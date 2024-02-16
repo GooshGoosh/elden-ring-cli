@@ -14,7 +14,8 @@ import pyinputplus as pyip
 import pandas as pd
 
 
-unupgraded_weapons_path = ''
+CLASSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'classes'))
+WEAPONS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'weapons'))
 
 
 def roll_d10():
@@ -34,14 +35,6 @@ class Character:
 
     Attributes
     ----------
-    _classes_path: str
-        A string formatted to be the absolute path of the given directory.
-        The directory should always point to the classes directory in the
-        elden_ring directory.
-    _starter_weapons_path: str
-        A string formatted to be the absolute path of the given directory/file.
-        The path should always lead to the starter-weapons.json file in the
-        weapons directory.
     _player_max_health: int
         The maximum health value of the player.
     _player_current_health: int
@@ -60,17 +53,10 @@ class Character:
         The chosen character class of the player.
     _player_name: str
         The name of the player.
-    _character_path: str
-        The path to the chosen character's class file.
-    _class_data: dict
-        The data from the file in the _character_path variable.
-    _weapon_reader: dict
-        The data from the file in the _starter_weapons_path variable.
-        Used to get the attack of the starting weapons for the classes.
 
     Methods
     -------
-    read_stats()
+    update_stats()
         Reads the player's stats and updates their max health and attack.
     print_stats()
         Prints the player's stats.
@@ -102,14 +88,9 @@ class Character:
         boss. Round the damage number up to the nearest whole number.
     """
 
-    def __init__(self, path):
-        global unupgraded_weapons_path
-
-        # Paths for the directory/file that contains the classes and
-        # the starter weapons for each class.
-        classes_path = os.path.join(os.path.dirname(path), 'classes/')
-        unupgraded_weapons_path = os.path.join(os.path.dirname(path),
-                                               'weapons/unupgraded-weapons.csv')
+    def __init__(self):
+        # Path for the file that contains the starter weapons for each class.
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
 
         self._player_max_health = 0
         self._player_current_health = 0
@@ -164,8 +145,8 @@ class Character:
         # Join the path to the classes .json files and the chosen class to get
         # the .json file for the chosen class and load the json file data into
         # classData.
-        character_path = os.path.join(classes_path, \
-                                            self._character.lower() + '.json')
+        character_path = os.path.join(CLASSES_PATH,
+                                      self._character.lower() + '.json')
         try:
             with open(character_path, 'r', encoding="UTF-8") as file:
                 class_data = json.load(file)
@@ -214,10 +195,11 @@ class Character:
         self._player_max_health = self._stats['Vig'] * 10
         self._player_current_health = self._player_max_health
 
-    def read_stats(self):
-        """read_stats Reads the player's stats and updates their max health and
+    def update_stats(self):
+        """update_stats Reads the player's stats and updates their max health and
         attacked based on their Vig, Str, and Dex.
         """
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
         # Set the player's health based on their Vig stat.
         self._player_max_health = self._stats['Vig'] * 10
 
@@ -335,7 +317,7 @@ class Character:
         time.sleep(0.75)
         self._stats[stat_to_inc] += 1
         self._player_runes -= 10000
-        self.read_stats()
+        self.update_stats()
 
     def grace(self):
         """grace Give the player a set of actions to choose from and perform the
