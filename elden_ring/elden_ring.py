@@ -933,8 +933,8 @@ def single_player_game():
     Includes the tutorial boss fight as well as a single field, mini and main
     boss fight.
     """
-    player_one = character.Character(PATH) # Create the player object.
-    boss_one = boss.Boss(PATH)             # Create the boss object.
+    player_one = character.Character() # Create the player object.
+    boss_one = boss.Boss()             # Create the boss object.
     player_one.print_stats() # Display the player's stats.
 
     tutorial_boss_fight(player_one, boss_one) # Begin the tutorial boss fight.
@@ -958,10 +958,10 @@ def two_player_game():
     boss fight. This version will exit the program early if the host object
     reaches 0 hp.
     """
-    host = character.Character(PATH)          # Create the host object.
-    summon_one = character.Character(PATH)     # Create the first summon object.
+    host = character.Character()          # Create the host object.
+    summon_one = character.Character()     # Create the first summon object.
     players = [host, summon_one] # Create the player list.
-    boss_one = boss.Boss(PATH)    # Create the boss object.
+    boss_one = boss.Boss()    # Create the boss object.
 
     host.print_stats()          # Display the host's stats.
     print()
@@ -995,11 +995,11 @@ def three_player_game():
     boss fight. This version will exit the program early if the host object
     reaches 0 hp.
     """
-    host = character.Character(PATH)            # Create the host object.
-    summon_one = character.Character(PATH)       # Create the first summon object.
-    summon_two = character.Character(PATH)       # Create the second summon object.
+    host = character.Character()            # Create the host object.
+    summon_one = character.Character()       # Create the first summon object.
+    summon_two = character.Character()       # Create the second summon object.
     players = [host, summon_one, summon_two]  # Create the player list.
-    boss_one = boss.Boss(PATH)    # Create the boss object.
+    boss_one = boss.Boss()    # Create the boss object.
 
     host.print_stats()          # Display the host's stats.
     print()
