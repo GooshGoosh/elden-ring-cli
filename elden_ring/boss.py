@@ -73,7 +73,7 @@ class Boss():
     def __init__(self):
         # Set the starter/tutorial boss name, health, attack, armor and runes.
         self._boss_name = 'Soldier of Godrick'
-        self._boss_health = 2#math.ceil(384 / 2)
+        self._boss_health = math.ceil(384 / 2)
         self._boss_attack = 10
         self._boss_armor = 7
         self._boss_runes = 400
