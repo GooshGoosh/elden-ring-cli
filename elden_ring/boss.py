@@ -1,5 +1,5 @@
 """
-This module is responsible for the Boss object in the eldenRing.py program.
+This module is responsible for the Boss object in the elden_ring.py program.
 The boss' stats and actions are controlled through boss.py via the Boss class
 and various attributes and methods.
 """

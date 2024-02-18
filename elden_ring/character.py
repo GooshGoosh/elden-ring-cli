@@ -1,5 +1,5 @@
 """
-This module is responsible for the Character object in the eldenRing.py program.
+This module is responsible for the Character object in the elden_ring.py program.
 The character's stats and actions are controlled through character.py via the
 Character class and various attributes and methods.
 """
@@ -53,6 +53,8 @@ class Character:
         The chosen character class of the player.
     _player_name: str
         The name of the player.
+    _player_level: int
+        The level of the player's character.
 
     Methods
     -------
@@ -154,6 +156,8 @@ class Character:
             print(f'\nFile {character_path} not found! Exiting...')
             sys.exit(1)
 
+        self._player_level = class_data['Level']
+
         for k, v in class_data['Stats'].items():
             # Store the player's stats in the _stats dict.
             self._stats[k] = v
@@ -235,8 +239,10 @@ class Character:
         """print_stats Prints the player's class, stats and current equipment.
         """
         # Print the player's class and stats.
+        print('-' * 30)
         print(f'Name: {self._player_name}\n')
-        print(f'Class: {self._character}\n')
+        print(f'Class: {self._character}')
+        print(f'Level: {self._player_level}\n')
         for k, v in self._stats.items():
             print((k +":").ljust(7, ' ') + str(v))
         print(f'\nHP: {self._player_max_health}')
@@ -299,11 +305,18 @@ class Character:
 
     def increase_player_level(self):
         """increase_player_level Lets the player choose a stat to increase to
-        level up their character if they have sufficient runes.
+        level up their character if they have sufficient runes. The formula for
+        the rune cost is taken from eldenring.wiki.fextralife.com/Level
         """
-        if self._player_runes < 10000:
+        # Formula for calculating the rune cost.
+        x = ((self._player_level + 81) - 92) * 0.02
+        # Change x to 0 if the above expression results in x below 0.
+        x = max(x, 0)
+        rune_cost = int(((x + 0.1) * ((self._player_level + 81) ** 2)) + 1)
+
+        if self._player_runes < rune_cost:
             print("\nInsufficient runes to level up.")
-            print(f'Need {10000 - self._player_runes} to level up.')
+            print(f'Need {rune_cost} runes to level up.')
             time.sleep(0.75)    # Allow player time to read message.
             return
 
@@ -313,11 +326,14 @@ class Character:
         # Increase the player's chosen stat and reduce their current runes.
         print(f'\n{stat_to_inc} increased from {self._stats[stat_to_inc]}',
               f'to {self._stats[stat_to_inc] + 1}\n')
+
+        self._stats[stat_to_inc] += 1
+        self._player_runes -= rune_cost
+        self._player_level += 1
+        self.update_stats()
+
         print(f'Current runes: {self._player_runes}')
         time.sleep(0.75)
-        self._stats[stat_to_inc] += 1
-        self._player_runes -= 10000
-        self.update_stats()
 
     def grace(self):
         """grace Give the player a set of actions to choose from and perform the
