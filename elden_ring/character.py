@@ -1,5 +1,5 @@
 """
-This module is responsible for the Character object in the eldenRing.py program.
+This module is responsible for the Character object in the elden_ring.py program.
 The character's stats and actions are controlled through character.py via the
 Character class and various attributes and methods.
 """
@@ -11,6 +11,11 @@ import random
 import time
 import sys
 import pyinputplus as pyip
+import pandas as pd
+
+
+CLASSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'classes'))
+WEAPONS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'weapons'))
 
 
 def roll_d10():
@@ -30,14 +35,6 @@ class Character:
 
     Attributes
     ----------
-    _classes_path: str
-        A string formatted to be the absolute path of the given directory.
-        The directory should always point to the classes directory in the
-        elden_ring directory.
-    _starter_weapons_path: str
-        A string formatted to be the absolute path of the given directory/file.
-        The path should always lead to the starter-weapons.json file in the
-        weapons directory.
     _player_max_health: int
         The maximum health value of the player.
     _player_current_health: int
@@ -56,17 +53,12 @@ class Character:
         The chosen character class of the player.
     _player_name: str
         The name of the player.
-    _character_path: str
-        The path to the chosen character's class file.
-    _class_data: dict
-        The data from the file in the _character_path variable.
-    _weapon_reader: dict
-        The data from the file in the _starter_weapons_path variable.
-        Used to get the attack of the starting weapons for the classes.
+    _player_level: int
+        The level of the player's character.
 
     Methods
     -------
-    read_stats()
+    update_stats()
         Reads the player's stats and updates their max health and attack.
     print_stats()
         Prints the player's stats.
@@ -98,12 +90,9 @@ class Character:
         boss. Round the damage number up to the nearest whole number.
     """
 
-    def __init__(self, path):
-        # Paths for the directory/file that contains the classes and
-        # the starter weapons for each class.
-        self._classes_path = os.path.join(os.path.dirname(path), 'classes/')
-        self._starter_weapons_path = os.path.join(os.path.dirname(path),
-                                                  'weapons/starter-weapons.json')
+    def __init__(self):
+        # Path for the file that contains the starter weapons for each class.
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
 
         self._player_max_health = 0
         self._player_current_health = 0
@@ -158,14 +147,16 @@ class Character:
         # Join the path to the classes .json files and the chosen class to get
         # the .json file for the chosen class and load the json file data into
         # classData.
-        self._character_path = os.path.join(self._classes_path, \
-                                            self._character.lower() + '.json')
+        character_path = os.path.join(CLASSES_PATH,
+                                      self._character.lower() + '.json')
         try:
-            with open(self._character_path, 'r', encoding="UTF-8") as file:
+            with open(character_path, 'r', encoding="UTF-8") as file:
                 class_data = json.load(file)
         except FileNotFoundError:
-            print(f'\nFile {self._character_path} not found! Exiting...')
+            print(f'\nFile {character_path} not found! Exiting...')
             sys.exit(1)
+
+        self._player_level = class_data['Level']
 
         for k, v in class_data['Stats'].items():
             # Store the player's stats in the _stats dict.
@@ -175,24 +166,30 @@ class Character:
             # Fill the slots for the player's equipment in the _equipment dict.
             self._equipment[k] = v
 
-        # Search through the starter weapons file to find the weapon that is
-        # in the player's right hand and give the player that weapon's attack
-        # rating.
         try:
-            with open(self._starter_weapons_path, 'r', encoding="UTF-8") as file:
-                weapon_reader = json.load(file)
-        except FileNotFoundError:
-            print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
-            sys.exit(1)
+            weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
 
-        for k, v in weapon_reader.items():
-            if k == self._equipment['Right Hand']:
-                self._player_attack = int(v)
-            # If the player is holding another weapon in their left hand, then
-            # increase the player's attack rating by half of the left-handed
-            # weapon.
-            if k == self._equipment['Left Hand']:
-                self._player_attack += (int(v) // 2)
+            # Get the data for the weapon in the player's right hand and set the
+            # player's attack to that weapon's attack.
+            right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
+            self._player_attack = int(right_hand.iloc[0,2])
+
+            # Get the data for the weapon in the player's left hand.
+            left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
+            if left_hand.iloc[0,1] == "Weapon":
+                # Add half its attack to the player's attack if it is a weapon.
+                self._player_attack += int(left_hand.iloc[0,2]) // 2
+            elif left_hand.iloc[0,1] == "Shield":
+                # Increase the player's armor if it is a shield.
+                self._player_armor = 13
+        except FileNotFoundError:
+            print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
+        except IndexError:
+            print('\nError: Index out of range for weapon data! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
 
         # Increase the player's attack by their Str and Dex stat.
         self._player_attack += (self._stats['Str'] + self._stats['Dex'])
@@ -202,34 +199,38 @@ class Character:
         self._player_max_health = self._stats['Vig'] * 10
         self._player_current_health = self._player_max_health
 
-        # Determine if the player has a shielf in their left hand.
-        if "shield" or "buckler" in self._equipment['Left Hand'].lower():
-            self._player_armor = 13
-
-    def read_stats(self):
-        """read_stats Reads the player's stats and updates their max health and
+    def update_stats(self):
+        """update_stats Reads the player's stats and updates their max health and
         attacked based on their Vig, Str, and Dex.
         """
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
+        # Set the player's health based on their Vig stat.
         self._player_max_health = self._stats['Vig'] * 10
 
-        # Search through the starter weapons file to find the weapon that is
-        # in the player's right hand and give the player that weapon's attack
-        # rating.
         try:
-            with open(self._starter_weapons_path, 'r', encoding="UTF-8") as file:
-                weapon_reader = json.load(file)
-        except FileNotFoundError:
-            print(f'\nFile {self._starter_weapons_path} not found! Exiting...')
-            sys.exit(1)
+            weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
 
-        for k, v in weapon_reader.items():
-            if k == self._equipment['Right Hand']:
-                self._player_attack = int(v)
-            # If the player is holding another weapon in their left hand, then
-            # increase the player's attack rating by half of the left-handed
-            # weapon.
-            if k == self._equipment['Left Hand']:
-                self._player_attack += (int(v) // 2)
+            # Get the data for the weapon in the player's right hand and set the
+            # player's attack to that weapon's attack.
+            right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
+            self._player_attack = int(right_hand.iloc[0,2])
+
+            # Get the data for the weapon in the player's left hand.
+            left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
+            if left_hand.iloc[0,1] == "Weapon":
+                # Add half its attack to the player's attack if it is a weapon.
+                self._player_attack += int(left_hand.iloc[0,2]) // 2
+            elif left_hand.iloc[0,1] == "Shield":
+                # Increase the player's armor if it is a shield.
+                self._player_armor = 13
+        except FileNotFoundError:
+            print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
+        except IndexError:
+            print('\nError: Index out of range for weapon data! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
 
         # Increase the player's attack by their Str and Dex stat.
         self._player_attack += (self._stats['Str'] + self._stats['Dex'])
@@ -238,12 +239,15 @@ class Character:
         """print_stats Prints the player's class, stats and current equipment.
         """
         # Print the player's class and stats.
+        print('-' * 30)
         print(f'Name: {self._player_name}\n')
-        print(f'Class: {self._character}\n')
+        print(f'Class: {self._character}')
+        print(f'Level: {self._player_level}\n')
         for k, v in self._stats.items():
             print((k +":").ljust(7, ' ') + str(v))
         print(f'\nHP: {self._player_max_health}')
         print(f'Attack: {self._player_attack}')
+        print(f'Runes: {self._player_runes}')
         print('-' * 30)
 
         # Print the player's currently equipped items.
@@ -301,10 +305,19 @@ class Character:
 
     def increase_player_level(self):
         """increase_player_level Lets the player choose a stat to increase to
-        level up their character if they have sufficient runes.
+        level up their character if they have sufficient runes. The formula for
+        the rune cost is taken from eldenring.wiki.fextralife.com/Level
         """
-        if self._player_runes < 10000:
+        # Formula for calculating the rune cost.
+        x = ((self._player_level + 81) - 92) * 0.02
+        # Change x to 0 if the above expression results in x below 0.
+        x = max(x, 0)
+        rune_cost = int(((x + 0.1) * ((self._player_level + 81) ** 2)) + 1)
+
+        if self._player_runes < rune_cost:
             print("\nInsufficient runes to level up.")
+            print(f'Need {rune_cost} runes to level up.')
+            time.sleep(0.75)    # Allow player time to read message.
             return
 
         stats = ['Vig', 'Mnd', 'End', 'Str', 'Dex', 'Int', 'Fth', 'Arc']
@@ -313,10 +326,14 @@ class Character:
         # Increase the player's chosen stat and reduce their current runes.
         print(f'\n{stat_to_inc} increased from {self._stats[stat_to_inc]}',
               f'to {self._stats[stat_to_inc] + 1}\n')
-        time.sleep(0.5)
+
         self._stats[stat_to_inc] += 1
-        self._player_runes -= 10000
-        self.read_stats()
+        self._player_runes -= rune_cost
+        self._player_level += 1
+        self.update_stats()
+
+        print(f'Current runes: {self._player_runes}')
+        time.sleep(0.75)
 
     def grace(self):
         """grace Give the player a set of actions to choose from and perform the
