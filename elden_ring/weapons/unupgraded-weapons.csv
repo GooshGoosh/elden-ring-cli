@@ -18,7 +18,6 @@ Banished Knight's Shield;Medium Shield;0
 Bastard Sword;Greatsword;138
 Bastard's Stars;Flail;143
 Battle Axe;Axe;123
-Battle Axe;Weapon;123
 Battle Hammer;Great Hammer;131
 Beast Crest Heater Shield;Medium Shield;0
 Beast-Repellent Torch;Torches;162
@@ -44,7 +43,6 @@ Brass Shield;Medium Shield;0
 Briar Greatshield;Great Shield;0
 Brick Hammer;Great Hammer;122
 Broadsword;Straight Sword;117
-Broadsword;Weapon;117
 Buckler;Shield;0
 Buckler;Small Shield;0
 Butchering Knife;Greataxe;134
@@ -70,7 +68,6 @@ Cleanrot Knight's Sword;Thrusting Sword;109
 Cleanrot Spear;Spear;168
 Clinging Bone;Fist;96
 Club;Hammer;103
-Club;Weapon;103
 Coded Sword;Straight Sword;85
 Coil Shield;Small Shield;0
 Commander's Standard;Halberd;138
@@ -118,7 +115,6 @@ Erdtree Greatbow;Greatbow;125
 Erdtree Greatshield;Great Shield;0
 Erdtree Seal;Sacred Seal;40
 Estoc;Thrusting Sword;107
-Estoc;Weapon;107
 Executioner's Greataxe;Greataxe;150
 Falchion;Curved Sword;109
 Fallingstar Beast Jaw;Colossal Weapon;216
@@ -171,7 +167,6 @@ Gravel Stone Seal;Sacred Seal;25
 Great Club;Colossal Weapon;154
 Great Epee;Heavy Thrusting Sword;124
 Great Knife;Dagger;75
-Great Knife;Weapon;75
 Great Mace;Great Hammer;134
 Great Omenkiller Cleaver;Greataxe;142
 Great Stars;Great Hammer;135
@@ -183,7 +178,6 @@ Greatsword;Colossal Sword;164
 Grossmesser;Curved Sword;115
 Guardian's Swordspear;Halberd;139
 Halberd;Halberd;125
-Halberd;Weapon;125
 Haligtree Crest Greatshield;Great Shield;0
 Halo Scythe;Reaper;194
 Hammer;Hammer;124
@@ -316,7 +310,6 @@ Sacrificial Axe;Axe;128
 Scavenger's Curved Sword;Curved Sword;105
 Scepter of the All-Knowing;Hammer;163
 Scimitar;Curved Sword;106
-Scimitar;Weapon;106
 Scorpion Kite Shield;Medium Shield;0
 Scorpion's Stinger;Dagger;79
 Scripture Wooden Shield;Shield;0
@@ -330,9 +323,7 @@ Serpentbone Blade;Katana;120
 Shamshir;Curved Sword;108
 Shield of the Guilty;Small Shield;0
 Short Spear;Spear;112
-Short Spear;Weapon;112
 Short Sword;Straight Sword;102
-Short Sword;Weapon;102
 Shortbow;Light Bow;65
 Shotel;Curved Sword;96
 Siluria's Tree;Great Spear;180
@@ -369,7 +360,6 @@ Twinbird Kite Shield;Medium Shield;0
 Twinblade;Twinblades;119
 Twinned Knight Swords;Twinblades;122
 Uchigatana;Katana;115
-Uchigatana;Weapon;115
 Urumi;Whip;101
 Varre's Bouquet;Hammer;46
 Venomous Fang;Claw;92

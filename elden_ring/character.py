@@ -16,6 +16,14 @@ import pandas as pd
 
 CLASSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'classes'))
 WEAPONS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'weapons'))
+WEAPON_TYPES = ['Dagger', 'Straight Sword', 'Greatsword', 'Colossal Weapon',
+                'Thrusting Sword', 'Heavy Thrusting Sword', 'Curved Sword',
+                'Curved Greatsword', 'Katana', 'Twinblade', 'Axe', 'Greataxe',
+                'Hammer', 'Flail', 'Great Hammer', 'Colossal Weapon', 'Spear',
+                'Great Spear', 'Halberd', 'Reaper', 'Whip', 'Fist', 'Claw',
+                'Light Bow', 'Bow', 'Greatbow', 'Crossbow', 'Ballista',
+                'Glintstone Staff', 'Sacred Seal', 'Torches']
+SHIELD_TYPES = ['Small Shield', 'Medium Shield', 'Great Shield']
 
 
 def roll_d10():
@@ -176,10 +184,10 @@ class Character:
 
             # Get the data for the weapon in the player's left hand.
             left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
-            if left_hand.iloc[0,1] == "Weapon":
+            if left_hand.iloc[0,1] in WEAPON_TYPES:
                 # Add half its attack to the player's attack if it is a weapon.
                 self._player_attack += int(left_hand.iloc[0,2]) // 2
-            elif left_hand.iloc[0,1] == "Shield":
+            elif left_hand.iloc[0,1] in SHIELD_TYPES:
                 # Increase the player's armor if it is a shield.
                 self._player_armor = 13
         except FileNotFoundError:
@@ -217,10 +225,10 @@ class Character:
 
             # Get the data for the weapon in the player's left hand.
             left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
-            if left_hand.iloc[0,1] == "Weapon":
+            if left_hand.iloc[0,1] in WEAPON_TYPES:
                 # Add half its attack to the player's attack if it is a weapon.
                 self._player_attack += int(left_hand.iloc[0,2]) // 2
-            elif left_hand.iloc[0,1] == "Shield":
+            elif left_hand.iloc[0,1] in SHIELD_TYPES:
                 # Increase the player's armor if it is a shield.
                 self._player_armor = 13
         except FileNotFoundError:
