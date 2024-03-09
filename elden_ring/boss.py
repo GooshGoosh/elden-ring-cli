@@ -13,6 +13,7 @@ import pandas as pd
 
 
 BOSSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'bosses'))
+WEAPONS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'weapons'))
 
 
 def roll_d10():
@@ -77,6 +78,25 @@ class Boss():
         self._boss_attack = 10
         self._boss_armor = 7
         self._boss_runes = 400
+
+    def drop_weapon(self, chance = 1):
+        # Make the boss drop a random weapon from one of two weapon lists.
+
+        # Ensure that chance is at least 1 so there is no error for randrange.
+        if chance <= 0:
+            chance = 1
+
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
+        upgraded_weapons_path = os.path.join(WEAPONS_PATH, 'full-upgraded-weapons.csv')
+
+        luck = random.randrange(0, chance)
+
+        if luck == 0:
+            weapon_drop = pd.read_csv(upgraded_weapons_path, sep=';').sample()
+            return weapon_drop
+
+        weapon_drop = pd.read_csv(unupgraded_weapons_path, sep=';').sample()
+        return weapon_drop
 
     def set_field_boss(self):
         """set_field_boss Sets the stats for a boss from the field-boss-list
