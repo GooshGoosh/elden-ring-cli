@@ -11,12 +11,11 @@ Ring starting class (e.g. Vig: 0).
 The stats are followed by the 6 equipment slots for the character
 including Right Hand, Left Hand, Helm, Torso, Wrists, and Legs.
 """
-
-
-import random
 import sys
 import time
 import os
+import secrets
+
 try:
     import pyinputplus as pyip
 except ImportError:
@@ -50,12 +49,12 @@ def roll_d20(advantage=False, disadvantage=False):
         attack.
     """
     if advantage:
-        return max(random.randrange(1,21), random.randrange(1,21))
+        return max(secrets.SystemRandom().randrange(1,21), secrets.SystemRandom().randrange(1,21))
 
     if disadvantage:
-        return min(random.randrange(1,21), random.randrange(1,21))
+        return min(secrets.SystemRandom().randrange(1,21), secrets.SystemRandom().randrange(1,21))
 
-    return random.randrange(1,21)
+    return secrets.SystemRandom().randrange(1,21)
 
 
 def player_attack_phase(player_obj, boss_obj):

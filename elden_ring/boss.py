@@ -3,13 +3,12 @@ This module is responsible for the Boss object in the elden_ring.py program.
 The boss' stats and actions are controlled through boss.py via the Boss class
 and various attributes and methods.
 """
-
-import random
 import math
 import sys
 import os
 import time
 import pandas as pd
+import secrets
 
 
 BOSSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'bosses'))
@@ -22,7 +21,7 @@ def roll_d10():
         int: Returns a number from 1-10 (inclusive).
     """
     # Roll a number in the range 1-10 and return it.
-    return random.randrange(1,11)
+    return secrets.SystemRandom().randrange(1,11)
 
 
 # Class for the boss character.
