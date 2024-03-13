@@ -7,11 +7,11 @@ Character class and various attributes and methods.
 import math
 import json
 import os
-import random
 import time
 import sys
 import pyinputplus as pyip
 import pandas as pd
+import secrets
 
 
 CLASSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'classes'))
@@ -33,7 +33,7 @@ def roll_d10():
         int: Returns a number from 1-10 (inclusive).
     """
     # Roll a number in the range 1-10 and return it.
-    return random.randrange(1,11)
+    return secrets.SystemRandom().randrange(1,11)
 
 
 # The class for the the player character.
