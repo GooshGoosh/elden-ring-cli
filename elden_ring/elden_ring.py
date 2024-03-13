@@ -122,8 +122,10 @@ def tutorial_boss_fight(player_obj, boss_obj):
         player_obj (character.Character): Object of the player in the fight.
         boss_obj (boss.Boss): Object of the boss in the fight.
     """
-    # Set the boss' runes to drop if defeated.
+    # Set the boss' runes and weapon to drop if defeated.
     runes = boss_obj.get_runes()
+    dropped_weapon = boss_obj.drop_weapon(chance=1)
+
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print(f'Begin fight VS {boss_obj.get_name()}')
@@ -152,6 +154,9 @@ def tutorial_boss_fight(player_obj, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
 
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')

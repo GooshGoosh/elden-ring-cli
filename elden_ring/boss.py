@@ -77,7 +77,7 @@ class Boss():
     def __init__(self):
         # Set the starter/tutorial boss name, health, attack, armor and runes.
         self._boss_name = 'Soldier of Godrick'
-        self._boss_health = math.ceil(384 / 2)
+        self._boss_health = 2#math.ceil(384 / 2)
         self._boss_attack = 10
         self._boss_armor = 7
         self._boss_runes = 400
@@ -106,12 +106,20 @@ class Boss():
 
         luck = random.randrange(0, chance)
 
-        if luck == 0:
-            weapon_drop = pd.read_csv(upgraded_weapons_path, sep=';').sample()
-            return weapon_drop
+        try:
+            if luck == 0:
+                weapon_drop = pd.read_csv(upgraded_weapons_path, sep=';').sample()
+                return weapon_drop
+        except FileNotFoundError:
+            print(f'File {upgraded_weapons_path} not found! Exiting...')
+            sys.exit(1)
 
-        weapon_drop = pd.read_csv(unupgraded_weapons_path, sep=';').sample()
-        return weapon_drop
+        try:
+            weapon_drop = pd.read_csv(unupgraded_weapons_path, sep=';').sample()
+            return weapon_drop
+        except FileNotFoundError:
+            print(f'File {unupgraded_weapons_path} not found! Exiting...')
+            sys.exit(1)
 
     def set_field_boss(self):
         """set_field_boss Sets the stats for a boss from the field-boss-list
