@@ -212,18 +212,28 @@ class Character:
         attacked based on their Vig, Str, and Dex.
         """
         unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
+        upgraded_weapons_path = os.path.join(WEAPONS_PATH, 'full-upgraded-weapons.csv')
+
         # Set the player's health based on their Vig stat.
         self._player_max_health = self._stats['Vig'] * 10
 
         try:
-            weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
-
             # Get the data for the weapon in the player's right hand and set the
             # player's attack to that weapon's attack.
+            if 'MAX' in self._equipment['Right Hand']:
+                weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+            else:
+                weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+
             right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
             self._player_attack = int(right_hand.iloc[0,2])
 
             # Get the data for the weapon in the player's left hand.
+            if 'MAX' in self._equipment['Left Hand']:
+                weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+            else:
+                weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+
             left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
             if left_hand.iloc[0,1] in WEAPON_TYPES:
                 # Add half its attack to the player's attack if it is a weapon.
