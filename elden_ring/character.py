@@ -82,6 +82,9 @@ class Character:
         Returns the player's current runes.
     increase_player_level()
         Increase the player's chosen stat.
+    change_weapon(weapon_data)
+        Give the player the opportunity to equip the new weapon dropped from the
+        previous boss fight.
     grace()
         Sets the player's current health value to the player's max health value.
     reduce_health(damage=0)
@@ -221,18 +224,38 @@ class Character:
             # Get the data for the weapon in the player's right hand and set the
             # player's attack to that weapon's attack.
             if 'MAX' in self._equipment['Right Hand']:
-                weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+                try:
+                    weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+                except FileNotFoundError:
+                    print(f'\nFile {upgraded_weapons_path} not found! Exiting...')
+                    time.sleep(1.5)
+                    sys.exit(1)
             else:
-                weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+                try:
+                    weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+                except FileNotFoundError:
+                    print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
+                    time.sleep(1.5)
+                    sys.exit(1)
 
             right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
             self._player_attack = int(right_hand.iloc[0,2])
 
             # Get the data for the weapon in the player's left hand.
             if 'MAX' in self._equipment['Left Hand']:
-                weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+                try:
+                    weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+                except FileNotFoundError:
+                    print(f'\nFile {upgraded_weapons_path} not found! Exiting...')
+                    time.sleep(1.5)
+                    sys.exit(1)
             else:
-                weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+                try:
+                    weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+                except FileNotFoundError:
+                    print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
+                    time.sleep(1.5)
+                    sys.exit(1)
 
             left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
             if left_hand.iloc[0,1] in WEAPON_TYPES:
@@ -241,10 +264,6 @@ class Character:
             elif left_hand.iloc[0,1] in SHIELD_TYPES:
                 # Increase the player's armor if it is a shield.
                 self._player_armor = 13
-        except FileNotFoundError:
-            print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
-            time.sleep(1.5)
-            sys.exit(1)
         except IndexError:
             print('\nError: Index out of range for weapon data! Exiting...')
             time.sleep(1.5)
@@ -352,6 +371,90 @@ class Character:
 
         print(f'Current runes: {self._player_runes}')
         time.sleep(0.75)
+
+    def change_weapon(self, weapon_data):
+        """change_weapon Ask the player if they would like to change the weapon in
+        once of their hands with the new weapon that was dropped from the previous
+        boss fight. Updates the stats after the player has to chosen to either equip
+        the new weapon or not.
+
+        Args:
+            weapon_data (pandas.core.frame.DataFrame): DataFrame of the weapon data
+            dropped from the previous boss fight that should follow the format of:
+            Name;Type;Attack.
+        """
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
+        upgraded_weapons_path = os.path.join(WEAPONS_PATH, 'full-upgraded-weapons.csv')
+        try:
+            weapon_name = weapon_data.iloc[0,0]
+            weapon_type = weapon_data.iloc[0,1]
+            weapon_attack = weapon_data.iloc[0,2]
+        except IndexError:
+            print('\nError: Index out of range for weapon data! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
+
+        # Get the data from the player's right hand weapon.
+        if 'MAX' in self._equipment['Right Hand']:
+            try:
+                weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+            except FileNotFoundError:
+                print(f'\nFile {upgraded_weapons_path} not found! Exiting...')
+                time.sleep(1.5)
+                sys.exit(1)
+        else:
+            try:
+                weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+            except FileNotFoundError:
+                print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
+                time.sleep(1.5)
+                sys.exit(1)
+        right_hand = weapons_df[weapons_df["Name"] == self._equipment['Right Hand']]
+
+        # Get the data from the player's left hand weapon.
+        if 'MAX' in self._equipment['Left Hand']:
+            try:
+                weapons_df = pd.read_csv(upgraded_weapons_path, sep=';')
+            except FileNotFoundError:
+                print(f'\nFile {upgraded_weapons_path} not found! Exiting...')
+                time.sleep(1.5)
+                sys.exit(1)
+        else:
+            try:
+                weapons_df = pd.read_csv(unupgraded_weapons_path, sep=';')
+            except FileNotFoundError:
+                print(f'\nFile {unupgraded_weapons_path} not found! Exiting...')
+                time.sleep(1.5)
+                sys.exit(1)
+        left_hand = weapons_df[weapons_df["Name"] == self._equipment['Left Hand']]
+
+        # Print the player's weapon attack for each hand, the new weapon's attack
+        # and ask if they would like to equip the new weapon.
+        try:
+            print(f'\nRight hand attack: {right_hand.iloc[0,2]}')
+            print(f'Left hand attack: {left_hand.iloc[0,2]}')
+        except IndexError:
+            print('\nError: Index out of range for weapon data! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
+        print(f'\n{weapon_name} attack: {weapon_attack}')
+        print('\nWeapons increase attack while shields increase your armor.')
+        response = pyip.inputYesNo(prompt='Would you like to equip the new weapon? Y/N: ')
+
+        if response == 'yes':
+            if weapon_type in WEAPON_TYPES:
+                hand = pyip.inputMenu(['Right Hand', 'Left Hand'],
+                                      prompt='\nSelect a hand to equip the weapon:\n',
+                                      numbered=True)
+                self._equipment[hand] = weapon_name
+                print(f'\n{weapon_name} equipped in the {hand}\n')
+            elif weapon_type in SHIELD_TYPES:
+                self._equipment['Left Hand'] = weapon_name
+                print(f'\n{weapon_name} equipped in Left Hand\n')
+
+        print('Updating stats...\n')
+        time.sleep(1.5)
+        self.update_stats()
 
     def grace(self):
         """grace Give the player a set of actions to choose from and perform the
