@@ -122,8 +122,10 @@ def tutorial_boss_fight(player_obj, boss_obj):
         player_obj (character.Character): Object of the player in the fight.
         boss_obj (boss.Boss): Object of the boss in the fight.
     """
-    # Set the boss' runes to drop if defeated.
+    # Set the boss' runes and weapon to drop if defeated.
     runes = boss_obj.get_runes()
+    dropped_weapon = boss_obj.drop_weapon(chance=10)
+
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print(f'Begin fight VS {boss_obj.get_name()}')
@@ -153,6 +155,11 @@ def tutorial_boss_fight(player_obj, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    player_obj.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     player_obj.add_runes(runes)
@@ -177,8 +184,10 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
     host_obj = player_list[0]
     summon_one = player_list[1]
 
-    # Set the boss' runes to drop if defeated.
+    # Set the boss' runes and weapon to drop if defeated.
     runes = boss_obj.get_runes()
+    dropped_weapon = boss_obj.drop_weapon(chance=10)
+
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print(f'Begin fight VS {boss_obj.get_name()}')
@@ -221,6 +230,12 @@ def two_player_tutorial_boss_fight(player_list, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    host_obj.change_weapon(dropped_weapon)
+    summon_one.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     host_obj.add_runes(runes)
@@ -248,8 +263,10 @@ def three_player_tutorial_boss_fight(player_list, boss_obj):
     summon_one = player_list[1]
     summon_two = player_list[2]
 
-    # Set the boss' runes to drop if defeated.
+    # Set the boss' runes and weapon to drop if defeated.
     runes = boss_obj.get_runes()
+    dropped_weapon = boss_obj.drop_weapon(chance=10)
+
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
     print(f'Begin fight VS {boss_obj.get_name()}')
@@ -302,6 +319,13 @@ def three_player_tutorial_boss_fight(player_list, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    host_obj.change_weapon(dropped_weapon)
+    summon_one.change_weapon(dropped_weapon)
+    summon_two.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     host_obj.add_runes(runes)
@@ -327,6 +351,7 @@ def field_boss_fight(player_obj, boss_obj):
     # Set the boss stats to the stats appropriate for a field boss.
     boss_obj.set_field_boss()
     runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
+    dropped_weapon = boss_obj.drop_weapon(chance=5) # Set the boss' dropped weapon.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -357,6 +382,11 @@ def field_boss_fight(player_obj, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    player_obj.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     player_obj.add_runes(runes)
@@ -382,6 +412,7 @@ def two_player_field_boss_fight(player_list, boss_obj):
     # Set the boss stats to the stats appropriate for a field boss.
     boss_obj.set_field_boss()
     runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
+    dropped_weapon = boss_obj.drop_weapon(chance=5) # Set the boss' dropped weapon.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -425,6 +456,12 @@ def two_player_field_boss_fight(player_list, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    host_obj.change_weapon(dropped_weapon)
+    summon_one.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     host_obj.add_runes(runes)
@@ -453,6 +490,7 @@ def three_player_field_boss_fight(player_list, boss_obj):
     # Set the boss stats to the stats appropriate for a field boss.
     boss_obj.set_field_boss()
     runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
+    dropped_weapon = boss_obj.drop_weapon(chance=5) # Set the boss' dropped weapon.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -506,6 +544,13 @@ def three_player_field_boss_fight(player_list, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    host_obj.change_weapon(dropped_weapon)
+    summon_one.change_weapon(dropped_weapon)
+    summon_two.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     host_obj.add_runes(runes)
@@ -531,6 +576,7 @@ def mini_boss_fight(player_obj, boss_obj):
     # Set the boss stats to the stats appropriate for a mini boss.
     boss_obj.set_mini_boss()
     runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
+    dropped_weapon = boss_obj.drop_weapon(chance=1) # Set the boss' dropped weapon.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -561,6 +607,11 @@ def mini_boss_fight(player_obj, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    player_obj.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     player_obj.add_runes(runes)
@@ -586,6 +637,7 @@ def two_player_mini_boss_fight(player_list, boss_obj):
     # Set the boss stats to the stats appropriate for a mini boss.
     boss_obj.set_mini_boss()
     runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
+    dropped_weapon = boss_obj.drop_weapon(chance=1) # Set the boss' dropped weapon.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -629,6 +681,12 @@ def two_player_mini_boss_fight(player_list, boss_obj):
     print('\nENEMY FELLED\n')
     time.sleep(1)
 
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    host_obj.change_weapon(dropped_weapon)
+    summon_one.change_weapon(dropped_weapon)
+
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')
     host_obj.add_runes(runes)
@@ -657,6 +715,7 @@ def three_player_mini_boss_fight(player_list, boss_obj):
     # Set the boss stats to the stats appropriate for a mini boss.
     boss_obj.set_mini_boss()
     runes = boss_obj.get_runes()    # Set the boss' runes to drop if defeated.
+    dropped_weapon = boss_obj.drop_weapon(chance=1) # Set the boss' dropped weapon.
 
     # Introduce the boss to the player and begin the boss fight.
     print('\nA CHALLENGER APPROACHES\n')
@@ -709,6 +768,13 @@ def three_player_mini_boss_fight(player_list, boss_obj):
     # If the boss has no hp, then show a victory screen and proceed.
     print('\nENEMY FELLED\n')
     time.sleep(1)
+
+    # Give the player the chance to equip the dropped weapon.
+    print(f'Boss dropped {dropped_weapon.iloc[0,0]}!')
+    time.sleep(1.5)
+    host_obj.change_weapon(dropped_weapon)
+    summon_one.change_weapon(dropped_weapon)
+    summon_two.change_weapon(dropped_weapon)
 
     # Update the player's runes value.
     print(f'You gained {runes} runes.\n')

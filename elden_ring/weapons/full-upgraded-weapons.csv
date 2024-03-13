@@ -18,7 +18,6 @@ Name;Type;Attack
 (MAX) Bastard Sword;Greatsword;338
 (MAX) Bastard's Stars;Flail;364
 (MAX) Battle Axe;Axe;313
-(MAX) Battle Axe;Weapon;123
 (MAX) Battle Hammer;Great Hammer;320
 (MAX) Beast Crest Heater Shield;Medium Shield;0
 (MAX) Beast-Repellent Torch;Torches;396
@@ -44,7 +43,6 @@ Name;Type;Attack
 (MAX) Briar Greatshield;Great Shield;0
 (MAX) Brick Hammer;Great Hammer;298
 (MAX) Broadsword;Straight Sword;286
-(MAX) Broadsword;Weapon;117
 (MAX) Buckler;Shield;0
 (MAX) Buckler;Small Shield;0
 (MAX) Butchering Knife;Greataxe;328
@@ -70,7 +68,6 @@ Name;Type;Attack
 (MAX) Cleanrot Spear;Spear;410
 (MAX) Clinging Bone;Fist;254
 (MAX) Club;Hammer;252
-(MAX) Club;Weapon;103
 (MAX) Coded Sword;Straight Sword;208
 (MAX) Coil Shield;Small Shield;0
 (MAX) Commander's Standard;Halberd;338
@@ -118,7 +115,6 @@ Name;Type;Attack
 (MAX) Erdtree Greatshield;Great Shield;0
 (MAX) Erdtree Seal;Sacred Seal;97
 (MAX) Estoc;Thrusting Sword;262
-(MAX) Estoc;Weapon;107
 (MAX) Executioner's Greataxe;Greataxe;367
 (MAX) Falchion;Curved Sword;267
 (MAX) Fallingstar Beast Jaw;Colossal Weapon;528
@@ -171,7 +167,6 @@ Name;Type;Attack
 (MAX) Great Club;Colossal Weapon;489
 (MAX) Great Epee;Heavy Thrusting Sword;303
 (MAX) Great Knife;Dagger;183
-(MAX) Great Knife;Weapon;75
 (MAX) Great Mace;Great Hammer;328
 (MAX) Great Omenkiller Cleaver;Greataxe;347
 (MAX) Great Stars;Great Hammer;330
@@ -183,7 +178,6 @@ Name;Type;Attack
 (MAX) Grossmesser;Curved Sword;281
 (MAX) Guardian's Swordspear;Halberd;340
 (MAX) Halberd;Halberd;306
-(MAX) Halberd;Weapon;125
 (MAX) Haligtree Crest Greatshield;Great Shield;0
 (MAX) Halo Scythe;Reaper;475
 (MAX) Hammer;Hammer;303
@@ -316,7 +310,6 @@ Name;Type;Attack
 (MAX) Scavenger's Curved Sword;Curved Sword;257
 (MAX) Scepter of the All-Knowing;Hammer;398
 (MAX) Scimitar;Curved Sword;259
-(MAX) Scimitar;Weapon;106
 (MAX) Scorpion Kite Shield;Medium Shield;0
 (MAX) Scorpion's Stinger;Dagger;193
 (MAX) Scripture Wooden Shield;Shield;0
@@ -330,9 +323,7 @@ Name;Type;Attack
 (MAX) Shamshir;Curved Sword;264
 (MAX) Shield of the Guilty;Small Shield;0
 (MAX) Short Spear;Spear;274
-(MAX) Short Spear;Weapon;112
 (MAX) Short Sword;Straight Sword;249
-(MAX) Short Sword;Weapon;102
 (MAX) Shortbow;Light Bow;159
 (MAX) Shotel;Curved Sword;235
 (MAX) Siluria's Tree;Great Spear;440
@@ -369,7 +360,6 @@ Name;Type;Attack
 (MAX) Twinblade;Twinblades;291
 (MAX) Twinned Knight Swords;Twinblades;298
 (MAX) Uchigatana;Katana;281
-(MAX) Uchigatana;Weapon;115
 (MAX) Urumi;Whip;247
 (MAX) Varre's Bouquet;Hammer;112
 (MAX) Venomous Fang;Claw;237

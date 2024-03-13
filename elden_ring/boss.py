@@ -13,6 +13,7 @@ import pandas as pd
 
 
 BOSSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'bosses'))
+WEAPONS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'weapons'))
 
 
 def roll_d10():
@@ -45,6 +46,9 @@ class Boss():
 
     Methods
     -------
+    drop_weapon(chance=1)
+        Allows the boss to drop a random weapon from one of two weapon lists
+        when defeated.
     set_field_boss()
         Sets the stats for a boss from the field-boss-list.csv file.
     set_mini_boss()
@@ -77,6 +81,47 @@ class Boss():
         self._boss_attack = 10
         self._boss_armor = 7
         self._boss_runes = 400
+
+    def drop_weapon(self, chance = 1):
+        """drop_weapon Allows the boss to drop a random weapon from one of two
+        weapon lists when defeated. The boss can either drop a weapon from the
+        list of unupgraded weapons or a weapon from the list of fully upgraded
+        weapons.
+
+        Args:
+            chance (int, optional): Determines the possibility of getting a fully
+            upgraded weapon to drop from the boss. The odds are "1 in 'chance'".
+            For example, chance = 1 means there is a 100% chance of the boss dropping
+            a fully upgraded weapon and chance = 2 is a 50% chance. Defaults to 1.
+
+        Returns:
+            pandas.core.frame.DataFrame: Sample DataFrame from one of the weapon lists.
+        """
+        # Ensure that chance is at least 1 so there is no error for randrange.
+        if chance <= 0:
+            chance = 1
+
+        unupgraded_weapons_path = os.path.join(WEAPONS_PATH, 'unupgraded-weapons.csv')
+        upgraded_weapons_path = os.path.join(WEAPONS_PATH, 'full-upgraded-weapons.csv')
+
+        luck = random.randrange(0, chance)
+
+        try:
+            if luck == 0:
+                weapon_drop = pd.read_csv(upgraded_weapons_path, sep=';').sample()
+                return weapon_drop
+        except FileNotFoundError:
+            print(f'File {upgraded_weapons_path} not found! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
+
+        try:
+            weapon_drop = pd.read_csv(unupgraded_weapons_path, sep=';').sample()
+            return weapon_drop
+        except FileNotFoundError:
+            print(f'File {unupgraded_weapons_path} not found! Exiting...')
+            time.sleep(1.5)
+            sys.exit(1)
 
     def set_field_boss(self):
         """set_field_boss Sets the stats for a boss from the field-boss-list
