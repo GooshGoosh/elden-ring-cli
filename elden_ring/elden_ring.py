@@ -1,16 +1,38 @@
 """
-elden_ring.py - Mini Elden Ring-based game that lets the user
-the tutorial boss Solder of Godrick and a majority of the field,
-mini, and main bosses from Elden Ring. Uses a random die roll of
-1-20 to decide if the Tarnished was able to attack the boss and
-dodge/block the boss' attack.
-Allows class selection via pyinputplus module and a list of .json
-files stored in elden_ring/classes. The .json file contains the
-class name followed by each stat and their values for each Elden
-Ring starting class (e.g. Vig: 0).
-The stats are followed by the 6 equipment slots for the character
-including Right Hand, Left Hand, Helm, Torso, Wrists, and Legs.
+elden_ring.py
+
+Listen up, brother! This is the main module for the Elden Ring CLI game, where you get to face off against
+the toughest bosses from Elden Ring. You'll be battling the tutorial boss Soldier of Godrick and a majority
+of the field, mini, and main bosses. The game uses a random die roll of 1-20 to decide if the Tarnished
+was able to attack the boss and dodge/block the boss' attack.
+
+You'll start by selecting your class using the pyinputplus module and a list of .json files stored in
+elden_ring/classes. Each .json file contains the class name followed by each stat and their values for
+each Elden Ring starting class (e.g. Vig: 0). The stats are followed by the 6 equipment slots for the
+character including Right Hand, Left Hand, Helm, Torso, Wrists, and Legs.
+
+Get ready to step into the ring and show those bosses what you're made of, brother!
+
+Functions:
+    single_player_game():
+        Function for a single player version of the program. Includes the tutorial boss fight as well as
+        a single field, mini, and main boss fight.
+
+    two_player_game():
+        Function for a two player version of the program. Includes the tutorial boss fight as well as
+        a single field, mini, and main boss fight. This version will exit the program early if the host
+        object reaches 0 hp.
+
+    three_player_game():
+        Function for a three player version of the program. Includes the tutorial boss fight as well as
+        a single field, mini, and main boss fight. This version will exit the program early if the host
+        object reaches 0 hp.
+
+    main():
+        Main function to call when running the program. This will get the number of players and run the
+        appropriate game mode based on the number of players joining the fight(s).
 """
+
 import sys
 import time
 

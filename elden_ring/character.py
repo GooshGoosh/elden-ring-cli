@@ -1,7 +1,17 @@
 """
-This module is responsible for the Character object in the elden_ring.py program.
-The character's stats and actions are controlled through character.py via the
-Character class and various attributes and methods.
+character.py
+
+Listen up, brother! This module is responsible for the Character object in the elden_ring.py program.
+The character's stats and actions are controlled through this module, via the Character class and
+its powerful attributes and methods. Get ready to step into the ring and show those bosses what you're made of!
+
+Classes:
+    Character:
+        A class used to represent and manage a player for the elden_ring.py program file.
+
+Functions:
+    roll_d10() -> int:
+        Generates a random number between 1 and 10 (inclusive), brother!
 """
 
 import math

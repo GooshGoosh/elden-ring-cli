@@ -1,14 +1,25 @@
 """
-This module is responsible for the Boss object in the elden_ring.py program.
-The boss' stats and actions are controlled through boss.py via the Boss class
-and various attributes and methods.
+boss.py
+
+Listen up, brother! This module is all about the Boss object in the elden_ring.py program.
+The boss' stats and actions are controlled through this module, via the Boss class and
+its powerful attributes and methods. Get ready to rumble with the toughest bosses in Elden Ring!
+
+Classes:
+    Boss:
+        A class used to represent and manage an Elden Ring boss for the elden_ring.py program file.
+
+Functions:
+    roll_d10() -> int:
+        Generates a random number between 1 and 10 (inclusive), brother!
 """
+
 import math
 import sys
 import os
 import time
-import pandas as pd
 import secrets
+import pandas as pd
 
 
 BOSSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'bosses'))

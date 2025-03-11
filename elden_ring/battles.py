@@ -1,3 +1,58 @@
+"""
+battles.py
+
+Listen up, brother! This module contains the functions to handle all the epic battles in the Elden Ring CLI game.
+We're talking player and boss attack phases, and different types of boss fights like tutorial, field, mini,
+and main boss fights.
+Whether you're going solo or teaming up with your buddies (up to three players), this module has got you covered!
+
+Functions:
+    roll_d20(advantage=False, disadvantage=False) -> int:
+        Generates a random number between 1 and 20, with optional advantage or disadvantage, brother!
+
+    player_attack_phase(player_obj, boss_obj):
+        Handles the player's attack phase against the boss, brother!
+
+    boss_attack_phase(player_obj, boss_obj):
+        Handles the boss's attack phase against the player, brother!
+
+    tutorial_boss_fight(player_obj, boss_obj):
+        Manages the tutorial boss fight for a single player, brother!
+
+    two_player_tutorial_boss_fight(player_list, boss_obj):
+        Manages the tutorial boss fight for two players, brother!
+
+    three_player_tutorial_boss_fight(player_list, boss_obj):
+        Manages the tutorial boss fight for three players, brother!
+
+    field_boss_fight(player_obj, boss_obj):
+        Manages a field boss fight for a single player, brother!
+
+    two_player_field_boss_fight(player_list, boss_obj):
+        Manages a field boss fight for two players, brother!
+
+    three_player_field_boss_fight(player_list, boss_obj):
+        Manages a field boss fight for three players, brother!
+
+    mini_boss_fight(player_obj, boss_obj):
+        Manages a mini boss fight for a single player, brother!
+
+    two_player_mini_boss_fight(player_list, boss_obj):
+        Manages a mini boss fight for two players, brother!
+
+    three_player_mini_boss_fight(player_list, boss_obj):
+        Manages a mini boss fight for three players, brother!
+
+    main_boss_fight(player_obj, boss_obj):
+        Manages a main boss fight for a single player, brother!
+
+    two_player_main_boss_fight(player_list, boss_obj):
+        Manages a main boss fight for two players, brother!
+
+    three_player_main_boss_fight(player_list, boss_obj):
+        Manages a main boss fight for three players, brother!
+"""
+
 import time
 import secrets
 import sys
