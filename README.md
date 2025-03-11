@@ -97,4 +97,3 @@ This project is licensed under the GNU General Public License v3.0.
 
 ## Documentation Disclaimer
 This README and the module docstrings for the .py files were written by Copilot.
-```
