@@ -1,4 +1,3 @@
-```markdown
 # Elden Ring CLI
 
 Listen up, brother! This project lets you simulate fighting bosses from the Elden Ring game in a command-line interface (CLI) environment. Get ready to step into the ring and show those bosses what you're made of!
@@ -46,7 +45,6 @@ To install the required dependencies, run:
 
 ```bash
 pip install -r requirements.txt
-```
 
 ## Running the Game
 
