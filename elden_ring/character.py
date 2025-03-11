@@ -19,9 +19,9 @@ import json
 import os
 import time
 import sys
+import secrets
 import pyinputplus as pyip
 import pandas as pd
-import secrets
 
 
 CLASSES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'classes'))
